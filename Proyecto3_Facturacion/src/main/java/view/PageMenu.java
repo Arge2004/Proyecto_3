@@ -32,6 +32,7 @@ public class PageMenu extends javax.swing.JFrame {
         btn_clientSection = new javax.swing.JButton();
         btn_registerBillings = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton3.setText("jButton1");
 
@@ -39,26 +40,48 @@ public class PageMenu extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_searchBillings.setText("jButton1");
+        btn_searchBillings.setBackground(new java.awt.Color(48, 153, 210));
+        btn_searchBillings.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_searchBillings.setForeground(new java.awt.Color(255, 255, 255));
+        btn_searchBillings.setText("Buscar Facturas");
+        btn_searchBillings.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(btn_searchBillings, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 170, 200));
 
-        btn_clientSection.setText("jButton1");
+        btn_clientSection.setBackground(new java.awt.Color(48, 153, 210));
+        btn_clientSection.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_clientSection.setForeground(new java.awt.Color(255, 255, 255));
+        btn_clientSection.setText("Clientes");
+        btn_clientSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(btn_clientSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 170, 200));
 
-        btn_registerBillings.setText("jButton1");
+        btn_registerBillings.setBackground(new java.awt.Color(48, 153, 210));
+        btn_registerBillings.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_registerBillings.setForeground(new java.awt.Color(255, 255, 255));
+        btn_registerBillings.setText("Registrar Facturas");
+        btn_registerBillings.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(btn_registerBillings, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 170, 200));
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(15, 120, 186));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Veterinaria Santo Tomás");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 696, -1));
@@ -121,6 +144,7 @@ public class PageMenu extends javax.swing.JFrame {
     private javax.swing.JButton btn_registerBillings;
     private javax.swing.JButton btn_searchBillings;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
