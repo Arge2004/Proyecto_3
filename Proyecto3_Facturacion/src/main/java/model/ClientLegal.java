@@ -3,21 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
+import control.Clients;
 /**
  *
  * @author argen
  */
-public class clientLegal extends client {
+public class ClientLegal extends Client implements Clients {
     private String socialReason;
 
-    public clientLegal(String socialReason, String phoneNumber, String emailAddress, String id, Address address) {
+    public ClientLegal(String socialReason, String phoneNumber, String emailAddress, String id, Address address) {
         super(phoneNumber, emailAddress, id, address);
         this.socialReason = socialReason;
     }
 
 
-    public String getSocialReason() {
+    @Override
+    public String getName() {
         return socialReason;
     }
 

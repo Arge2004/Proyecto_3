@@ -8,13 +8,13 @@ package model;
  *
  * @author argen
  */
-public class client {
+public class Client {
     private String phoneNumber;
     private String emailAddress;
     private String id;
     private Address address;
     
-    public client(String phoneNumber, String emailAddress, String id, Address address) {
+    public Client(String phoneNumber, String emailAddress, String id, Address address) {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.id= id;

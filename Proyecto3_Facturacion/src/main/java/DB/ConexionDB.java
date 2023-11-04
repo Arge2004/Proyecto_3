@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionDB {
+
     private static Connection connection;
 
     private static final String DRIVER = "org.mariadb.jdbc.Driver";
@@ -31,15 +32,15 @@ public class ConexionDB {
         }
         return connection;
     }
-    
-    public static void closeConexion(){
+
+    public static void closeConexion() {
         if (connection != null) {
-        try {
-            connection.close();
-            System.out.println("Conexión cerrada");
-        } catch (SQLException e) {
-            System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            try {
+                connection.close();
+                System.out.println("Conexión cerrada");
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
         }
-    }
     }
 }

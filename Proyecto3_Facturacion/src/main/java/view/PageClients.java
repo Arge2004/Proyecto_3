@@ -6,9 +6,9 @@ package view;
 
 import javax.swing.JOptionPane;
 import model.Address;
-import model.client;
-import model.clientLegal;
-import model.clientNatural;
+import model.Client;
+import model.ClientLegal;
+import model.ClientNatural;
 
 /**
  *
@@ -253,7 +253,7 @@ public class PageClients extends javax.swing.JFrame {
         switch (cbx_personType.getSelectedIndex()) {
             case 1:
                 //natural
-                client clientNatural = new clientNatural(
+                Client clientNatural = new ClientNatural(
                         txt_name.getText(),
                         txt_lastName.getText(),
                         txt_phone.getText(),
@@ -268,7 +268,7 @@ public class PageClients extends javax.swing.JFrame {
                 );
             case 2:
             //juridico
-                client clientLegal = new clientLegal(
+                Client clientLegal = new ClientLegal(
                         txt_name.getText(),   
                         txt_phone.getText(),
                         txt_email.getText(),
