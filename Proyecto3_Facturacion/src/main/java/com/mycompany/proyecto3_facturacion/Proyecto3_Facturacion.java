@@ -4,6 +4,8 @@
 
 package com.mycompany.proyecto3_facturacion;
 
+import DB.ConexionDB;
+
 /**
  *
  * @author argen
@@ -11,7 +13,8 @@ package com.mycompany.proyecto3_facturacion;
 public class Proyecto3_Facturacion {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("Hola");
+        ConexionDB conexion= new ConexionDB();
+        conexion.getConexion();
+        conexion.closeConexion();
     }
 }
