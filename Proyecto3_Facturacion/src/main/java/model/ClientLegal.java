@@ -8,10 +8,10 @@ package model;
  *
  * @author argen
  */
-public class clientLegal extends client {
+public class ClientLegal extends Client {
     private String socialReason;
 
-    public clientLegal(String socialReason, String phoneNumber, String emailAddress, String id, Address address) {
+    public ClientLegal(String socialReason, String phoneNumber, String emailAddress, String id, Address address) {
         super(phoneNumber, emailAddress, id, address);
         this.socialReason = socialReason;
     }
