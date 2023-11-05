@@ -33,25 +33,38 @@ public class PageBillings extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_consultBills = new javax.swing.JTable();
         spn_billDate1 = new javax.swing.JSpinner();
         btn_filter = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_intervalDates = new javax.swing.JLabel();
+        lbl_billPersonType = new javax.swing.JLabel();
         cbx_billPersonType = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_billDocument = new javax.swing.JLabel();
         txt_billDocument = new javax.swing.JTextField();
         spn_billDate2 = new javax.swing.JSpinner();
+        btn_generatePdf = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        cbx_typeProducts = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        cbx_products = new javax.swing.JComboBox<>();
+        tbl_consultPeople = new javax.swing.JTable();
+        lbl_consultPeople = new javax.swing.JLabel();
+        txt_consultPeople = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_previewBills = new javax.swing.JTable();
+        lbl_preview = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel3 = new javax.swing.JPanel();
         txt_priceProducts = new javax.swing.JTextField();
+        lbl_unitPrice = new javax.swing.JLabel();
+        cbx_products = new javax.swing.JComboBox<>();
+        lbl_products = new javax.swing.JLabel();
+        cbx_typeProducts = new javax.swing.JComboBox<>();
+        lbl_typeProducts = new javax.swing.JLabel();
+        txt_cantity = new javax.swing.JTextField();
+        lbl_cantity = new javax.swing.JLabel();
+        txt_totalPrice = new javax.swing.JTextField();
+        lbl_totalPrice = new javax.swing.JLabel();
+        btn_addBills = new javax.swing.JButton();
+        lbl_infoBills = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -62,7 +75,7 @@ public class PageBillings extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_consultBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -73,37 +86,41 @@ public class PageBillings extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_consultBills);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 525));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 840, 480));
 
         spn_billDate1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613340000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
-        jPanel1.add(spn_billDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 140, -1));
+        jPanel1.add(spn_billDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 580, 140, -1));
 
         btn_filter.setBackground(new java.awt.Color(48, 153, 210));
         btn_filter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_filter.setForeground(new java.awt.Color(255, 255, 255));
         btn_filter.setText("Filtrar");
-        jPanel1.add(btn_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 550, 140, 40));
+        jPanel1.add(btn_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 140, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Ingresar Intervalo de Fechas");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, -1, -1));
+        lbl_intervalDates.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_intervalDates.setText("Ingresar Intervalo de Fechas");
+        jPanel1.add(lbl_intervalDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Tipo de Persona");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+        lbl_billPersonType.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_billPersonType.setText("Tipo de Persona");
+        jPanel1.add(lbl_billPersonType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
         cbx_billPersonType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Persona Natural", "Persona Juridica" }));
-        jPanel1.add(cbx_billPersonType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 160, -1));
+        jPanel1.add(cbx_billPersonType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 160, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Ingresar Documento");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
-        jPanel1.add(txt_billDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 160, -1));
+        lbl_billDocument.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_billDocument.setText("Ingresar Documento");
+        jPanel1.add(lbl_billDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
+        jPanel1.add(txt_billDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 160, -1));
 
         spn_billDate2.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613460000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
-        jPanel1.add(spn_billDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, 140, -1));
+        jPanel1.add(spn_billDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 580, 140, -1));
+
+        btn_generatePdf.setBackground(new java.awt.Color(255, 255, 204));
+        btn_generatePdf.setText("Generar PDF");
+        jPanel1.add(btn_generatePdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 140, 30));
 
         jTabbedPane1.addTab("Consultar Facturas", jPanel1);
 
@@ -111,49 +128,84 @@ public class PageBillings extends javax.swing.JFrame {
 
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_consultPeople.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane5.setViewportView(jTable4);
+        jScrollPane5.setViewportView(tbl_consultPeople);
 
-        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 370, 520));
+        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 340, 560));
 
-        jLabel4.setText("Buscar por Nombre/Documento");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 170, -1));
+        lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
+        jPanel2.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
+        jPanel2.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 170, -1));
 
-        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
-        cbx_typeProducts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbx_typeProductsActionPerformed(evt);
+        tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Id", "Nombre", "Precio Total"
             }
-        });
-        jPanel2.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 210, -1));
+        ));
+        jScrollPane2.setViewportView(tbl_previewBills);
 
-        jLabel5.setText("Tipo de Servicio");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 500, 210));
 
-        jLabel6.setText("jLabel6");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        lbl_preview.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_preview.setText("Previsualización");
+        jPanel2.add(lbl_preview, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 500, 10));
 
-        cbx_products.setEnabled(false);
-        cbx_products.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbx_productsActionPerformed(evt);
-            }
-        });
-        jPanel2.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 210, -1));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 255), 1, true));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_priceProducts.setEditable(false);
-        jPanel2.add(txt_priceProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 90, -1));
+        jPanel3.add(txt_priceProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 130, -1));
+
+        lbl_unitPrice.setText("Precio / Unidad");
+        jPanel3.add(lbl_unitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+
+        cbx_products.setEnabled(false);
+        jPanel3.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 340, -1));
+
+        lbl_products.setText("Servicios / Productos");
+        jPanel3.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
+        jPanel3.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 340, -1));
+
+        lbl_typeProducts.setText("Tipo de Servicio");
+        jPanel3.add(lbl_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 190, -1));
+
+        lbl_cantity.setText("Cantidad");
+        jPanel3.add(lbl_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        txt_totalPrice.setEditable(false);
+        jPanel3.add(txt_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, -1));
+
+        lbl_totalPrice.setText("Precio Total");
+        jPanel3.add(lbl_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        btn_addBills.setBackground(new java.awt.Color(48, 153, 210));
+        btn_addBills.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_addBills.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addBills.setText("Añadir Factura");
+        jPanel3.add(btn_addBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 260, 30));
+
+        lbl_infoBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_infoBills.setText("<html> <center>Ingrese Informacion del Producto <br> y Seleccione a una Persona </html>");
+        jPanel3.add(lbl_infoBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 440, 360));
 
         jTabbedPane1.addTab("Registrar Facturas", jPanel2);
 
@@ -174,23 +226,6 @@ public class PageBillings extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbx_typeProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_typeProductsActionPerformed
-        cbx_products.removeAllItems();
-        if (cbx_typeProducts.getSelectedIndex() == 0) {
-            cbx_products.setEnabled(false);
-        } else {
-            cbx_products.setEnabled(true);
-            for (Product elemento : crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()))) {
-                cbx_products.addItem(elemento.getName());
-            }
-        }
-
-    }//GEN-LAST:event_cbx_typeProductsActionPerformed
-
-    private void cbx_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_productsActionPerformed
-        txt_priceProducts.setText(String.valueOf(crudBD.getProductPrice(String.valueOf(cbx_products.getSelectedItem()))));
-    }//GEN-LAST:event_cbx_productsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,27 +263,40 @@ public class PageBillings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_addBills;
     private javax.swing.JButton btn_filter;
+    private javax.swing.JButton btn_generatePdf;
     private javax.swing.JComboBox<String> cbx_billPersonType;
     private javax.swing.JComboBox<String> cbx_products;
     private javax.swing.JComboBox<String> cbx_typeProducts;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_billDocument;
+    private javax.swing.JLabel lbl_billPersonType;
+    private javax.swing.JLabel lbl_cantity;
+    private javax.swing.JLabel lbl_consultPeople;
+    private javax.swing.JLabel lbl_infoBills;
+    private javax.swing.JLabel lbl_intervalDates;
+    private javax.swing.JLabel lbl_preview;
+    private javax.swing.JLabel lbl_products;
+    private javax.swing.JLabel lbl_totalPrice;
+    private javax.swing.JLabel lbl_typeProducts;
+    private javax.swing.JLabel lbl_unitPrice;
     private javax.swing.JSpinner spn_billDate1;
     private javax.swing.JSpinner spn_billDate2;
+    private javax.swing.JTable tbl_consultBills;
+    private javax.swing.JTable tbl_consultPeople;
+    private javax.swing.JTable tbl_previewBills;
     private javax.swing.JTextField txt_billDocument;
+    private javax.swing.JTextField txt_cantity;
+    private javax.swing.JTextField txt_consultPeople;
     private javax.swing.JTextField txt_priceProducts;
+    private javax.swing.JTextField txt_totalPrice;
     // End of variables declaration//GEN-END:variables
 }
