@@ -8,11 +8,11 @@ package model;
  *
  * @author argen
  */
-public class clientNatural extends client{
+public class ClientNatural extends Client{
     private String name;
     private String lastName;
 
-    public clientNatural(String name, String lastName, String phoneNumber, String emailAddress, String id, Address address) {
+    public ClientNatural(String name, String lastName, String phoneNumber, String emailAddress, String id, Address address) {
         super(phoneNumber, emailAddress, id, address);
         this.name = name;
         this.lastName = lastName;
