@@ -4,6 +4,12 @@
  */
 package view;
 
+import DB.ConexionDB;
+import DB.CrudBD;
+import control.Clients;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Address;
 import model.Client;
@@ -249,7 +255,7 @@ public class PageClients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registroClienteActionPerformed
-
+        CrudBD crudBD = new CrudBD();
         switch (cbx_personType.getSelectedIndex()) {
             case 1:
                 //natural
@@ -266,10 +272,17 @@ public class PageClients extends javax.swing.JFrame {
                                 txt_addressPostalCode.getText()
                         )
                 );
+
+                try {
+                    crudBD.createClient(clientNatural, (Clients) clientNatural, new ConexionDB());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             case 2:
-            //juridico
+                //juridico
                 Client clientLegal = new ClientLegal(
-                        txt_name.getText(),   
+                        txt_name.getText(),
                         txt_phone.getText(),
                         txt_email.getText(),
                         txt_document.getText(),
@@ -280,10 +293,17 @@ public class PageClients extends javax.swing.JFrame {
                                 txt_addressPostalCode.getText()
                         )
                 );
-            default:
-                JOptionPane.showMessageDialog(null,"¡No has seleccionado ningun tipo de Cliente!");
 
+                try {
+                    crudBD.createClient(clientLegal, (Clients) clientLegal, new ConexionDB());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            default:
+                JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
         }
+
 
     }//GEN-LAST:event_btn_registroClienteActionPerformed
 
