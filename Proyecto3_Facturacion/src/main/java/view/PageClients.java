@@ -273,7 +273,7 @@ public class PageClients extends javax.swing.JFrame {
                 );
 
                 try {
-                    crudBD.createClient(clientNatural, (Clients) clientNatural, new ConexionDB());
+                    crudBD.createClient(clientNatural, (Clients) clientNatural);
                 } catch (SQLException ex) {
                     Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -294,7 +294,7 @@ public class PageClients extends javax.swing.JFrame {
                 );
 
                 try {
-                    crudBD.createClient(clientLegal, (Clients) clientLegal, new ConexionDB());
+                    crudBD.createClient(clientLegal, (Clients) clientLegal);
                 } catch (SQLException ex) {
                     Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
