@@ -51,6 +51,7 @@ public class PageBillings extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cbx_products = new javax.swing.JComboBox<>();
+        txt_priceProducts = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -144,7 +145,15 @@ public class PageBillings extends javax.swing.JFrame {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         cbx_products.setEnabled(false);
+        cbx_products.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_productsActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 210, -1));
+
+        txt_priceProducts.setEditable(false);
+        jPanel2.add(txt_priceProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 90, -1));
 
         jTabbedPane1.addTab("Registrar Facturas", jPanel2);
 
@@ -178,6 +187,10 @@ public class PageBillings extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cbx_typeProductsActionPerformed
+
+    private void cbx_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_productsActionPerformed
+        txt_priceProducts.setText(String.valueOf(crudBD.getProductPrice(String.valueOf(cbx_products.getSelectedItem()))));
+    }//GEN-LAST:event_cbx_productsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,5 +249,6 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JSpinner spn_billDate1;
     private javax.swing.JSpinner spn_billDate2;
     private javax.swing.JTextField txt_billDocument;
+    private javax.swing.JTextField txt_priceProducts;
     // End of variables declaration//GEN-END:variables
 }
