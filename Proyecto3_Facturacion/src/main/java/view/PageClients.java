@@ -277,7 +277,7 @@ public class PageClients extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                break;
             case 2:
                 //juridico
                 Client clientLegal = new ClientLegal(
@@ -298,7 +298,7 @@ public class PageClients extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
         }

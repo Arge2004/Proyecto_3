@@ -25,7 +25,7 @@ public class CrudBD {
             Statement st = conexion.getConexion().createStatement();
             String query;
             if (p instanceof ClientNatural) {
-                query = "INSERT INTO cliens_natural (id,name, phoneNumber, emailAddress, address) values (?, ?, ?,?,?)";
+                query = "INSERT INTO clients_natural (id,name, phoneNumber, emailAddress, address) values (?, ?, ?,?,?)";
             } else {
                 query = "INSERT INTO clients_legal (id,reasonSocial, phoneNumber, emailAddress, address) values (?, ?, ?,?,?)";
             }
