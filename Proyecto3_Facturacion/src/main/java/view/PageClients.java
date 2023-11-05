@@ -68,12 +68,13 @@ public class PageClients extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(327, 750));
 
         jScrollPane1.setBackground(new java.awt.Color(242, 242, 242));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(327, 700));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(327, 750));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(327, 700));
+        jPanel1.setPreferredSize(new java.awt.Dimension(327, 750));
 
         lbl_adress.setText("Direccion");
 
@@ -235,7 +236,7 @@ public class PageClients extends javax.swing.JFrame {
                     .addComponent(txt_addressPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_registroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
