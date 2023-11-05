@@ -77,8 +77,27 @@ public class CrudBD {
         } catch (Exception e) {
             System.out.println(e);
         }
-        conn.closeConexion();
 
         return products;
+    }
+
+    public int getProductPrice(String name) {
+        int price = 0; // Inicializa la variable de precio
+
+        try {
+            String query = "SELECT price FROM products WHERE name = ?";
+            ps = conn.getConexion().prepareStatement(query);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                price = rs.getInt("price");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return price;
     }
 }
