@@ -4,6 +4,9 @@
  */
 package view;
 
+import DB.CrudBD;
+import model.Product;
+
 /**
  *
  * @author gotle
@@ -13,8 +16,9 @@ public class PageBillings extends javax.swing.JFrame {
     /**
      * Creates new form PageBillings
      */
+    CrudBD crudBD = new CrudBD();
     public PageBillings() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
@@ -39,6 +43,14 @@ public class PageBillings extends javax.swing.JFrame {
         txt_billDocument = new javax.swing.JTextField();
         spn_billDate2 = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        cbx_typeProducts = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbx_products = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -95,6 +107,44 @@ public class PageBillings extends javax.swing.JFrame {
         jTabbedPane1.addTab("Consultar Facturas", jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable4);
+
+        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 370, 520));
+
+        jLabel4.setText("Buscar por Nombre/Documento");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, -1, -1));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 170, -1));
+
+        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
+        cbx_typeProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_typeProductsActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 210, -1));
+
+        jLabel5.setText("Tipo de Servicio");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+
+        jLabel6.setText("jLabel6");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jPanel2.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 210, -1));
+
         jTabbedPane1.addTab("Registrar Facturas", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,6 +164,13 @@ public class PageBillings extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbx_typeProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_typeProductsActionPerformed
+        cbx_products.removeAllItems();
+        for (Product elemento: crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()))){
+            cbx_products.addItem(elemento.getName());
+        }
+    }//GEN-LAST:event_cbx_typeProductsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,14 +210,22 @@ public class PageBillings extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_filter;
     private javax.swing.JComboBox<String> cbx_billPersonType;
+    private javax.swing.JComboBox<String> cbx_products;
+    private javax.swing.JComboBox<String> cbx_typeProducts;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JSpinner spn_billDate1;
     private javax.swing.JSpinner spn_billDate2;
     private javax.swing.JTextField txt_billDocument;
