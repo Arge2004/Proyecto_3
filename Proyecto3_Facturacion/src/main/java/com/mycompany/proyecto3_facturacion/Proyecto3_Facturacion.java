@@ -5,6 +5,7 @@
 package com.mycompany.proyecto3_facturacion;
 
 import DB.ConexionDB;
+import view.PageMenu;
 
 /**
  *
@@ -16,5 +17,6 @@ public class Proyecto3_Facturacion {
         ConexionDB conexion= new ConexionDB();
         conexion.getConexion();
         conexion.closeConexion();
+        new PageMenu().setVisible(true);
     }
 }

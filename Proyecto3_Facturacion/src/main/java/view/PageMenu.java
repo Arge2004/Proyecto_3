@@ -15,6 +15,7 @@ public class PageMenu extends javax.swing.JFrame {
      */
     public PageMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -28,7 +29,6 @@ public class PageMenu extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btn_searchBillings = new javax.swing.JButton();
         btn_clientSection = new javax.swing.JButton();
         btn_registerBillings = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -40,26 +40,29 @@ public class PageMenu extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_searchBillings.setBackground(new java.awt.Color(48, 153, 210));
-        btn_searchBillings.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        btn_searchBillings.setForeground(new java.awt.Color(255, 255, 255));
-        btn_searchBillings.setText("Buscar Facturas");
-        btn_searchBillings.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(btn_searchBillings, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 170, 200));
-
         btn_clientSection.setBackground(new java.awt.Color(48, 153, 210));
         btn_clientSection.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         btn_clientSection.setForeground(new java.awt.Color(255, 255, 255));
         btn_clientSection.setText("Clientes");
         btn_clientSection.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(btn_clientSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 170, 200));
+        btn_clientSection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clientSectionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_clientSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 170, 200));
 
         btn_registerBillings.setBackground(new java.awt.Color(48, 153, 210));
         btn_registerBillings.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         btn_registerBillings.setForeground(new java.awt.Color(255, 255, 255));
-        btn_registerBillings.setText("Registrar Facturas");
+        btn_registerBillings.setText("Facturacion");
         btn_registerBillings.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(btn_registerBillings, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 170, 200));
+        btn_registerBillings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registerBillingsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_registerBillings, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 170, 200));
 
         jPanel2.setBackground(new java.awt.Color(15, 120, 186));
 
@@ -104,6 +107,16 @@ public class PageMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_clientSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clientSectionActionPerformed
+        this.dispose();
+        new PageClientsMenu().setVisible(true);
+    }//GEN-LAST:event_btn_clientSectionActionPerformed
+
+    private void btn_registerBillingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerBillingsActionPerformed
+        this.dispose();
+        new PageBillings().setVisible(true);
+    }//GEN-LAST:event_btn_registerBillingsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -142,7 +155,6 @@ public class PageMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_clientSection;
     private javax.swing.JButton btn_registerBillings;
-    private javax.swing.JButton btn_searchBillings;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

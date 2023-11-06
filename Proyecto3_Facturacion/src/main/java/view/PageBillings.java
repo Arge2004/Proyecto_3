@@ -19,6 +19,7 @@ public class PageBillings extends javax.swing.JFrame {
     CrudBD crudBD = new CrudBD();
     public PageBillings() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -31,25 +32,7 @@ public class PageBillings extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_consultBills = new javax.swing.JTable();
-        spn_billDate1 = new javax.swing.JSpinner();
-        btn_filter = new javax.swing.JButton();
-        lbl_intervalDates = new javax.swing.JLabel();
-        lbl_billPersonType = new javax.swing.JLabel();
-        cbx_billPersonType = new javax.swing.JComboBox<>();
-        lbl_billDocument = new javax.swing.JLabel();
-        txt_billDocument = new javax.swing.JTextField();
-        spn_billDate2 = new javax.swing.JSpinner();
-        btn_generatePdf = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tbl_consultPeople = new javax.swing.JTable();
-        lbl_consultPeople = new javax.swing.JLabel();
-        txt_consultPeople = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_previewBills = new javax.swing.JTable();
         lbl_preview = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
@@ -65,15 +48,177 @@ public class PageBillings extends javax.swing.JFrame {
         lbl_totalPrice = new javax.swing.JLabel();
         btn_addBills = new javax.swing.JButton();
         lbl_infoBills = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_consultPeople = new javax.swing.JTable();
+        lbl_consultPeople = new javax.swing.JLabel();
+        txt_consultPeople = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_previewBills = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_consultBills = new javax.swing.JTable();
+        spn_billDate1 = new javax.swing.JSpinner();
+        btn_filter = new javax.swing.JButton();
+        lbl_intervalDates = new javax.swing.JLabel();
+        lbl_billPersonType = new javax.swing.JLabel();
+        cbx_billPersonType = new javax.swing.JComboBox<>();
+        lbl_billDocument = new javax.swing.JLabel();
+        txt_billDocument = new javax.swing.JTextField();
+        spn_billDate2 = new javax.swing.JSpinner();
+        btn_generatePdf = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
+        setPreferredSize(new java.awt.Dimension(882, 620));
+        setResizable(false);
 
         jTabbedPane1.setBackground(new java.awt.Color(15, 120, 186));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(840, 650));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(870, 620));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setMinimumSize(new java.awt.Dimension(870, 620));
+        jPanel2.setPreferredSize(new java.awt.Dimension(870, 620));
+
+        lbl_preview.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_preview.setText("Previsualización");
+
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 255), 1, true));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_priceProducts.setEditable(false);
+        jPanel3.add(txt_priceProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, -1));
+
+        lbl_unitPrice.setText("Precio / Unidad");
+        jPanel3.add(lbl_unitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        cbx_products.setEnabled(false);
+        jPanel3.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 340, -1));
+
+        lbl_products.setText("Servicios / Productos");
+        jPanel3.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
+        jPanel3.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 340, -1));
+
+        lbl_typeProducts.setText("Tipo de Servicio");
+        jPanel3.add(lbl_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 190, -1));
+
+        lbl_cantity.setText("Cantidad");
+        jPanel3.add(lbl_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
+
+        txt_totalPrice.setEditable(false);
+        jPanel3.add(txt_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 340, -1));
+
+        lbl_totalPrice.setText("Precio Total");
+        jPanel3.add(lbl_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        btn_addBills.setBackground(new java.awt.Color(48, 153, 210));
+        btn_addBills.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_addBills.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addBills.setText("Añadir Factura");
+        jPanel3.add(btn_addBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 260, 30));
+
+        lbl_infoBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_infoBills.setText("<html> <center>Ingrese Informacion del Producto <br> y Seleccione a una Persona </html>");
+        jPanel3.add(lbl_infoBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        tbl_consultPeople.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Nombre"
+            }
+        ));
+        jScrollPane5.setViewportView(tbl_consultPeople);
+
+        jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 400, 310));
+
+        lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
+        jPanel3.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jPanel3.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 190, -1));
+
+        tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nombre", "Cantidad", "Precio Total"
+            }
+        ));
+        jScrollPane2.setViewportView(tbl_previewBills);
+
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setText("X");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(370, 370, 370)
+                        .addComponent(lbl_preview))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lbl_preview)
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("Registrar Facturas", jPanel2);
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(870, 620));
+        jPanel1.setPreferredSize(new java.awt.Dimension(870, 620));
 
         tbl_consultBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,144 +233,128 @@ public class PageBillings extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_consultBills);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 840, 480));
-
         spn_billDate1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613340000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
-        jPanel1.add(spn_billDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 580, 140, -1));
 
         btn_filter.setBackground(new java.awt.Color(48, 153, 210));
         btn_filter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_filter.setForeground(new java.awt.Color(255, 255, 255));
         btn_filter.setText("Filtrar");
-        jPanel1.add(btn_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 140, 30));
 
         lbl_intervalDates.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_intervalDates.setText("Ingresar Intervalo de Fechas");
-        jPanel1.add(lbl_intervalDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
 
         lbl_billPersonType.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_billPersonType.setText("Tipo de Persona");
-        jPanel1.add(lbl_billPersonType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
         cbx_billPersonType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Persona Natural", "Persona Juridica" }));
-        jPanel1.add(cbx_billPersonType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 160, -1));
 
         lbl_billDocument.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_billDocument.setText("Ingresar Documento");
-        jPanel1.add(lbl_billDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
-        jPanel1.add(txt_billDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 160, -1));
 
         spn_billDate2.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613460000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
-        jPanel1.add(spn_billDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 580, 140, -1));
 
         btn_generatePdf.setBackground(new java.awt.Color(255, 255, 204));
         btn_generatePdf.setText("Generar PDF");
-        jPanel1.add(btn_generatePdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 140, 30));
+
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
+        jButton2.setText("Menu");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_billPersonType)
+                            .addComponent(cbx_billPersonType, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_billDocument)
+                            .addComponent(txt_billDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(lbl_intervalDates))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spn_billDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(spn_billDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_billPersonType)
+                        .addGap(4, 4, 4)
+                        .addComponent(cbx_billPersonType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_billDocument)
+                        .addGap(4, 4, 4)
+                        .addComponent(txt_billDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_intervalDates)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spn_billDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spn_billDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         jTabbedPane1.addTab("Consultar Facturas", jPanel1);
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        tbl_consultPeople.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane5.setViewportView(tbl_consultPeople);
-
-        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 340, 560));
-
-        lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
-        jPanel2.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
-        jPanel2.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 170, -1));
-
-        tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Id", "Nombre", "Precio Total"
-            }
-        ));
-        jScrollPane2.setViewportView(tbl_previewBills);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 500, 210));
-
-        lbl_preview.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_preview.setText("Previsualización");
-        jPanel2.add(lbl_preview, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 500, 10));
-
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 255), 1, true));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txt_priceProducts.setEditable(false);
-        jPanel3.add(txt_priceProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 130, -1));
-
-        lbl_unitPrice.setText("Precio / Unidad");
-        jPanel3.add(lbl_unitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
-
-        cbx_products.setEnabled(false);
-        jPanel3.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 340, -1));
-
-        lbl_products.setText("Servicios / Productos");
-        jPanel3.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
-
-        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
-        jPanel3.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 340, -1));
-
-        lbl_typeProducts.setText("Tipo de Servicio");
-        jPanel3.add(lbl_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-        jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 190, -1));
-
-        lbl_cantity.setText("Cantidad");
-        jPanel3.add(lbl_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        txt_totalPrice.setEditable(false);
-        jPanel3.add(txt_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, -1));
-
-        lbl_totalPrice.setText("Precio Total");
-        jPanel3.add(lbl_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
-
-        btn_addBills.setBackground(new java.awt.Color(48, 153, 210));
-        btn_addBills.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        btn_addBills.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addBills.setText("Añadir Factura");
-        jPanel3.add(btn_addBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 260, 30));
-
-        lbl_infoBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_infoBills.setText("<html> <center>Ingrese Informacion del Producto <br> y Seleccione a una Persona </html>");
-        jPanel3.add(lbl_infoBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 440, 360));
-
-        jTabbedPane1.addTab("Registrar Facturas", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        new PageMenu().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+        new PageMenu().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +398,8 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbx_billPersonType;
     private javax.swing.JComboBox<String> cbx_products;
     private javax.swing.JComboBox<String> cbx_typeProducts;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
