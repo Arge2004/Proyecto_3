@@ -11,7 +11,7 @@ import control.Clients;
 public class ClientLegal extends Client implements Clients {
     private String socialReason;
 
-    public ClientLegal(String socialReason, String phoneNumber, String emailAddress, String id, Address address) {
+    public ClientLegal(String socialReason, String phoneNumber, String emailAddress, String id, String address) {
         super(phoneNumber, emailAddress, id, address);
         this.socialReason = socialReason;
     }
@@ -21,9 +21,13 @@ public class ClientLegal extends Client implements Clients {
     public String getName() {
         return socialReason;
     }
-
+    
     public void setSocialReason(String socialReason) {
         this.socialReason = socialReason;
+    }
+
+    public String getSocialReason() {
+        return socialReason;
     }
 
 }

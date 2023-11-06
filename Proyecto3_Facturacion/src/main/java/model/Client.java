@@ -12,9 +12,9 @@ public class Client {
     private String phoneNumber;
     private String emailAddress;
     private String id;
-    private Address address;
+    private String address;
     
-    public Client(String phoneNumber, String emailAddress, String id, Address address) {
+    public Client(String phoneNumber, String emailAddress, String id, String address) {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.id= id;
@@ -45,11 +45,11 @@ public class Client {
         this.id = id;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
     

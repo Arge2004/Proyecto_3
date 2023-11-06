@@ -10,4 +10,5 @@ package control;
  */
 public interface Clients {
     public String getName();
+    public String getId();
 }

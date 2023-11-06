@@ -14,7 +14,7 @@ public class ClientNatural extends Client implements Clients{
     private String name;
     private String lastName;
 
-    public ClientNatural(String name, String lastName, String phoneNumber, String emailAddress, String id, Address address) {
+    public ClientNatural(String name, String lastName, String phoneNumber, String emailAddress, String id, String address) {
         super(phoneNumber, emailAddress, id, address);
         this.name = name;
         this.lastName = lastName;
@@ -30,9 +30,9 @@ public class ClientNatural extends Client implements Clients{
 
     @Override
     public String getName() {
-        return name+" "+lastName;
+        return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }

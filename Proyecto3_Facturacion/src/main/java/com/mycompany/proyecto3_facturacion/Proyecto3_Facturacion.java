@@ -14,9 +14,6 @@ import view.PageMenu;
 public class Proyecto3_Facturacion {
 
     public static void main(String[] args) {
-        ConexionDB conexion= new ConexionDB();
-        conexion.getConexion();
-        conexion.closeConexion();
         new PageMenu().setVisible(true);
     }
 }

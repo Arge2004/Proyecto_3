@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import model.Client;
+import model.ClientLegal;
 import model.ClientNatural;
 import model.Product;
 
@@ -29,24 +30,31 @@ public class CrudBD {
             Statement st = conn.getConexion().createStatement();
             String query;
             if (p instanceof ClientNatural) {
-                query = "INSERT INTO clients_natural (id,name, phoneNumber, emailAddress, address) values (?, ?, ?,?,?)";
+                query = "INSERT INTO clients_natural (id,name, lastName, phoneNumber, emailAddress, address) values (?, ?,?, ?,?,?)";
+                ps = conn.getConexion().prepareStatement(query);
+                ps.setString(1, p.getId());
+                ps.setString(2, client.getName());
+                ps.setString(3, ((ClientNatural) p).getLastName());
+                ps.setString(4, p.getPhoneNumber());
+                ps.setString(5, p.getEmailAdress());
+                ps.setString(6, p.getAddress().toString());
+                ps.executeUpdate();
+
             } else {
                 query = "INSERT INTO clients_legal (id,socialReason, phoneNumber, emailAddress, address) values (?, ?, ?,?,?)";
+                ps = conn.getConexion().prepareStatement(query);
+                ps.setString(1, p.getId());
+                ps.setString(2, client.getName());
+                ps.setString(3, p.getPhoneNumber());
+                ps.setString(4, p.getEmailAdress());
+                ps.setString(5, p.getAddress().toString());
+                ps.executeUpdate();
             }
-            ps = conn.getConexion().prepareStatement(query);
-            ps.setString(2, client.getName());
-            ps.setString(1, p.getId());
-            ps.setString(3, p.getPhoneNumber());
-            ps.setString(4, p.getEmailAdress());
-            ps.setString(5, p.getAddress().toString());
-            ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
-
-        conn.closeConexion();
     }
 
     public void eliminateClient() {
@@ -100,4 +108,48 @@ public class CrudBD {
 
         return price;
     }
+
+    public ArrayList<Clients> getClients() {
+        ArrayList<Clients> clients = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM clients_legal";
+            ps = conn.getConexion().prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Clients client = new ClientLegal(
+                        rs.getString("socialReason"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("emailAddress"),
+                        rs.getString("id"),
+                        rs.getString("address")
+                );
+
+                clients.add(client);
+            }
+
+            query = "SELECT * FROM clients_natural";
+            ps = conn.getConexion().prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Clients client = new ClientNatural(
+                        rs.getString("name"),
+                        rs.getString("lastName"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("emailAddress"),
+                        rs.getString("id"),
+                        rs.getString("address")
+                );
+
+                clients.add(client);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return clients;
+    }
+
 }

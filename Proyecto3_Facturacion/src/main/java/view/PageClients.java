@@ -69,7 +69,7 @@ public class PageClients extends javax.swing.JFrame {
         txt_addressPostalCode = new javax.swing.JTextField();
         btn_registroCliente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(360, 705));
         setResizable(false);
 
@@ -272,6 +272,12 @@ public class PageClients extends javax.swing.JFrame {
 
     private void btn_registroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registroClienteActionPerformed
         CrudBD crudBD = new CrudBD();
+        Address address = new Address(
+                txt_addressState.getText(),
+                txt_addressMunicipality.getText(),
+                txt_addressCity.getText(),
+                txt_addressPostalCode.getText()
+        );
         switch (cbx_personType.getSelectedIndex()) {
             case 1:
                 //natural
@@ -281,12 +287,7 @@ public class PageClients extends javax.swing.JFrame {
                         txt_phone.getText(),
                         txt_email.getText(),
                         txt_document.getText(),
-                        new Address(
-                                txt_addressState.getText(),
-                                txt_addressMunicipality.getText(),
-                                txt_addressCity.getText(),
-                                txt_addressPostalCode.getText()
-                        )
+                        address.toString()
                 );
 
                 try {
@@ -302,12 +303,7 @@ public class PageClients extends javax.swing.JFrame {
                         txt_phone.getText(),
                         txt_email.getText(),
                         txt_document.getText(),
-                        new Address(
-                                txt_addressState.getText(),
-                                txt_addressMunicipality.getText(),
-                                txt_addressCity.getText(),
-                                txt_addressPostalCode.getText()
-                        )
+                        address.toString()
                 );
 
                 try {

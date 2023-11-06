@@ -5,6 +5,12 @@
 package view;
 
 import DB.CrudBD;
+import control.Clients;
+import control.UseComponents;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Product;
 
 /**
@@ -13,13 +19,26 @@ import model.Product;
  */
 public class PageBillings extends javax.swing.JFrame {
 
+    private DefaultTableModel model, model1;
+    private CrudBD crudBD = new CrudBD();
+    private ArrayList<Clients> clients = crudBD.getClients();
+
     /**
      * Creates new form PageBillings
      */
-    CrudBD crudBD = new CrudBD();
     public PageBillings() {
         initComponents();
         this.setLocationRelativeTo(null);
+        model1 = (DefaultTableModel) tbl_consultPeople.getModel();
+        Iterator<Clients> iterator = clients.iterator();
+
+        while (iterator.hasNext()) {
+            Clients client = iterator.next();
+            model1.addRow(new Object[]{client.getId(),
+                client.getName(),});
+
+        }
+        tbl_consultPeople.setModel(model1);
     }
 
     /**
@@ -42,7 +61,6 @@ public class PageBillings extends javax.swing.JFrame {
         lbl_products = new javax.swing.JLabel();
         cbx_typeProducts = new javax.swing.JComboBox<>();
         lbl_typeProducts = new javax.swing.JLabel();
-        txt_cantity = new javax.swing.JTextField();
         lbl_cantity = new javax.swing.JLabel();
         txt_totalPrice = new javax.swing.JTextField();
         lbl_totalPrice = new javax.swing.JLabel();
@@ -52,6 +70,7 @@ public class PageBillings extends javax.swing.JFrame {
         tbl_consultPeople = new javax.swing.JTable();
         lbl_consultPeople = new javax.swing.JLabel();
         txt_consultPeople = new javax.swing.JTextField();
+        txt_cantity = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_previewBills = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -96,17 +115,26 @@ public class PageBillings extends javax.swing.JFrame {
         jPanel3.add(lbl_unitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         cbx_products.setEnabled(false);
+        cbx_products.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_productsActionPerformed(evt);
+            }
+        });
         jPanel3.add(cbx_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 340, -1));
 
         lbl_products.setText("Servicios / Productos");
         jPanel3.add(lbl_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenologia", "Examenes Clinicos", "Peluqueria" }));
+        cbx_typeProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Consulta", "Imagenología", "Exámenes Clínicos", "Peluquería" }));
+        cbx_typeProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_typeProductsActionPerformed(evt);
+            }
+        });
         jPanel3.add(cbx_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 340, -1));
 
         lbl_typeProducts.setText("Tipo de Servicio");
         jPanel3.add(lbl_typeProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-        jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 190, -1));
 
         lbl_cantity.setText("Cantidad");
         jPanel3.add(lbl_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
@@ -131,33 +159,43 @@ public class PageBillings extends javax.swing.JFrame {
 
         tbl_consultPeople.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Id", "Nombre"
             }
         ));
+        tbl_consultPeople.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_consultPeopleMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tbl_consultPeople);
 
         jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 400, 310));
 
         lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
         jPanel3.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+
+        txt_consultPeople.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_consultPeopleActionPerformed(evt);
+            }
+        });
+        txt_consultPeople.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_consultPeopleKeyTyped(evt);
+            }
+        });
         jPanel3.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 190, -1));
+
+        txt_cantity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        txt_cantity.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                txt_cantityStateChanged(evt);
+            }
+        });
+        jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 190, -1));
 
         tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -339,7 +377,7 @@ public class PageBillings extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -355,6 +393,66 @@ public class PageBillings extends javax.swing.JFrame {
         this.dispose();
         new PageMenu().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbx_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_productsActionPerformed
+        txt_cantity.setValue(1);
+        ArrayList<Product> productsByType = crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()));
+        for (Product elemento : productsByType) {
+            if (elemento.getName().equals(cbx_products.getSelectedItem())) {
+                txt_priceProducts.setText(String.valueOf(elemento.getPrice()));
+                txt_totalPrice.setText(String.valueOf(elemento.getPrice()));
+            }
+        }
+    }//GEN-LAST:event_cbx_productsActionPerformed
+
+    private void cbx_typeProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_typeProductsActionPerformed
+        txt_priceProducts.setText("");
+        txt_totalPrice.setText("");
+        txt_cantity.setValue(1);
+        cbx_products.removeAllItems();
+        if (cbx_typeProducts.getSelectedIndex() == 0) {
+            cbx_products.setEnabled(false);
+        } else {
+            cbx_products.setEnabled(true);
+            for (Product elemento : crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()))) {
+                cbx_products.addItem(elemento.getName());
+            }
+        }
+    }//GEN-LAST:event_cbx_typeProductsActionPerformed
+
+    private void txt_cantityStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txt_cantityStateChanged
+        txt_totalPrice.setText(UseComponents.totalPrice(txt_cantity, txt_priceProducts));
+    }//GEN-LAST:event_txt_cantityStateChanged
+
+    private void tbl_consultPeopleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_consultPeopleMouseClicked
+        int seleccionFila = tbl_consultPeople.rowAtPoint(evt.getPoint());
+        String selectedId = String.valueOf(tbl_consultPeople.getValueAt(seleccionFila, 0));
+        JOptionPane.showMessageDialog(null, selectedId);
+
+    }//GEN-LAST:event_tbl_consultPeopleMouseClicked
+
+    private void txt_consultPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_consultPeopleActionPerformed
+
+
+    }//GEN-LAST:event_txt_consultPeopleActionPerformed
+
+    private void txt_consultPeopleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_consultPeopleKeyTyped
+        String input = txt_consultPeople.getText();
+        DefaultTableModel model = new DefaultTableModel();
+
+        if (input.isEmpty()) {
+            // Si el campo de texto está vacío, muestra todos los datos originales
+            tbl_consultPeople.setModel(model1);
+        } else {
+            // Filtra y muestra solo los datos que coincidan con la entrada del usuario
+            for (Clients person : clients) {
+                if (person.getId().contains(input) || person.getName().contains(input)) {
+                    model.addRow(new Object[]{person.getId(), person.getName()});
+                }
+            }
+           tbl_consultPeople.setModel(model);
+        }  
+    }//GEN-LAST:event_txt_consultPeopleKeyTyped
 
     /**
      * @param args the command line arguments
@@ -425,7 +523,7 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JTable tbl_consultPeople;
     private javax.swing.JTable tbl_previewBills;
     private javax.swing.JTextField txt_billDocument;
-    private javax.swing.JTextField txt_cantity;
+    private javax.swing.JSpinner txt_cantity;
     private javax.swing.JTextField txt_consultPeople;
     private javax.swing.JTextField txt_priceProducts;
     private javax.swing.JTextField txt_totalPrice;
