@@ -274,41 +274,66 @@ public class PageClients extends javax.swing.JFrame {
                 txt_addressPostalCode.getText()
         );
         switch (cbx_personType.getSelectedIndex()) {
-            case 1:
+            case 1 -> {
                 //natural
-                Client clientNatural = new ClientNatural(
-                        txt_name.getText(),
-                        txt_lastName.getText(),
-                        txt_phone.getText(),
-                        txt_email.getText(),
-                        txt_document.getText(),
-                        address.toString()
+                boolean naturalFlag = UseComponents.validateEmptyFields(
+                        cbx_documentType,
+                        txt_name,
+                        txt_phone,
+                        txt_email,
+                        txt_addressCity,
+                        txt_addressMunicipality,
+                        txt_addressState,
+                        txt_addressPostalCode
                 );
-
-                try {
-                    crudBD.createClient(clientNatural, (Clients) clientNatural);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                if (!naturalFlag) {
+                    Client clientNatural = new ClientNatural(
+                            txt_name.getText(),
+                            txt_lastName.getText(),
+                            txt_phone.getText(),
+                            txt_email.getText(),
+                            txt_document.getText(),
+                            address.toString()
+                    );
+                    try {
+                        crudBD.createClient(clientNatural, (Clients) clientNatural);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
                 }
-                break;
-            case 2:
+            }
+            case 2 -> {
                 //juridico
-                Client clientLegal = new ClientLegal(
-                        txt_name.getText(),
-                        txt_phone.getText(),
-                        txt_email.getText(),
-                        txt_document.getText(),
-                        address.toString()
+                boolean legalFlag = UseComponents.validateEmptyFields(
+                        cbx_personType,
+                        txt_name,
+                        txt_phone,
+                        txt_email,
+                        txt_addressCity,
+                        txt_addressMunicipality,
+                        txt_addressState,
+                        txt_addressPostalCode
                 );
-
-                try {
-                    crudBD.createClient(clientLegal, (Clients) clientLegal);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                if (!legalFlag) {
+                    Client clientLegal = new ClientLegal(
+                            txt_name.getText(),
+                            txt_phone.getText(),
+                            txt_email.getText(),
+                            txt_document.getText(),
+                            address.toString()
+                    );
+                    try {
+                        crudBD.createClient(clientLegal, (Clients) clientLegal);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
                 }
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
+            }
+            default -> JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
         }
 
 

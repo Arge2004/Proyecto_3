@@ -4,6 +4,7 @@
  */
 package control;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -20,6 +21,26 @@ public class UseComponents {
         combobox.setSelectedIndex(0);
         for (JTextField textfield : textfields) {
             textfield.setText("");
+        }
+    }
+
+    public static boolean validateEmptyFields(javax.swing.JComboBox<String> combobox1, javax.swing.JTextField... textfields) {
+        boolean flag = true;
+        for (JTextField textfield : textfields) {
+            if (textfield.getText().isBlank()) {
+                flag = false; //si hay uno vacio entonces flag se vuelve false
+            }
+        }
+        if (flag==false) { //se valida si hay uno vacio
+            JOptionPane.showMessageDialog(null,"¡Debes Llenar Todos los Campos!");
+            return true;
+        } else {
+            if (combobox1.getSelectedIndex()==0){
+                JOptionPane.showMessageDialog(null,"¡Debes Llenar Todos los Campos!");
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
