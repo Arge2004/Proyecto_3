@@ -89,25 +89,28 @@ public class CrudBD {
         return products;
     }
 
-    public int getProductPrice(String name) {
-        int price = 0; // Inicializa la variable de precio
-
+    public Product getProduct(String id) {
+        Product product = new Product();
         try {
-            String query = "SELECT price FROM products WHERE name = ?";
+            String query = "SELECT * FROM products WHERE type_product = ?";
             ps = conn.getConexion().prepareStatement(query);
-            ps.setString(1, name);
+            ps.setString(1, id);
             rs = ps.executeQuery();
 
-            if (rs.next()) {
-                price = rs.getInt("price");
+            while (rs.next()) {
+                product.setId(rs.getString("id"));
+                product.setName(rs.getString("name"));
+                product.setPrice(rs.getInt("price"));
+                product.setTypeProduct(rs.getString("type_product"));
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return price;
+        return product;
     }
+
 
     public ArrayList<Clients> getClients() {
         ArrayList<Clients> clients = new ArrayList<>();

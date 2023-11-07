@@ -19,9 +19,11 @@ import model.Product;
  */
 public class PageBillings extends javax.swing.JFrame {
 
-    private DefaultTableModel model, model1;
+    private DefaultTableModel model1;
     private CrudBD crudBD = new CrudBD();
     private ArrayList<Clients> clients = crudBD.getClients();
+    private ArrayList<Product> productsByType = new ArrayList<>();
+    private ArrayList<Product> productForBill = new ArrayList<>();
 
     /**
      * Creates new form PageBillings
@@ -31,7 +33,6 @@ public class PageBillings extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         model1 = (DefaultTableModel) tbl_consultPeople.getModel();
         Iterator<Clients> iterator = clients.iterator();
-
         while (iterator.hasNext()) {
             Clients client = iterator.next();
             model1.addRow(new Object[]{client.getId(),
@@ -148,6 +149,11 @@ public class PageBillings extends javax.swing.JFrame {
         btn_addBills.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         btn_addBills.setForeground(new java.awt.Color(255, 255, 255));
         btn_addBills.setText("Añadir Factura");
+        btn_addBills.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addBillsActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_addBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 260, 30));
 
         lbl_infoBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -176,14 +182,9 @@ public class PageBillings extends javax.swing.JFrame {
         lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
         jPanel3.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
-        txt_consultPeople.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_consultPeopleActionPerformed(evt);
-            }
-        });
         txt_consultPeople.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_consultPeopleKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_consultPeopleKeyReleased(evt);
             }
         });
         jPanel3.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 190, -1));
@@ -198,10 +199,7 @@ public class PageBillings extends javax.swing.JFrame {
 
         tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nombre", "Cantidad", "Precio Total"
@@ -389,7 +387,7 @@ public class PageBillings extends javax.swing.JFrame {
 
     private void cbx_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_productsActionPerformed
         txt_cantity.setValue(1);
-        ArrayList<Product> productsByType = crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()));
+        productsByType = crudBD.getProducts(String.valueOf(cbx_typeProducts.getSelectedItem()));
         for (Product elemento : productsByType) {
             if (elemento.getName().equals(cbx_products.getSelectedItem())) {
                 txt_priceProducts.setText(String.valueOf(elemento.getPrice()));
@@ -421,31 +419,48 @@ public class PageBillings extends javax.swing.JFrame {
         int seleccionFila = tbl_consultPeople.rowAtPoint(evt.getPoint());
         String selectedId = String.valueOf(tbl_consultPeople.getValueAt(seleccionFila, 0));
         JOptionPane.showMessageDialog(null, selectedId);
-
     }//GEN-LAST:event_tbl_consultPeopleMouseClicked
 
-    private void txt_consultPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_consultPeopleActionPerformed
-
-
-    }//GEN-LAST:event_txt_consultPeopleActionPerformed
-
-    private void txt_consultPeopleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_consultPeopleKeyTyped
+    private void txt_consultPeopleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_consultPeopleKeyReleased
         String input = txt_consultPeople.getText();
-        DefaultTableModel model = new DefaultTableModel();
-
-        if (input.isEmpty()) {
-            // Si el campo de texto está vacío, muestra todos los datos originales
+        if (input.equals("")) {
+            model1 = (DefaultTableModel) tbl_consultPeople.getModel();
+            Iterator<Clients> iterator = clients.iterator();
+            while (iterator.hasNext()) {
+                Clients client = iterator.next();
+                model1.addRow(new Object[]{client.getId(),
+                    client.getName(),});
+            }
             tbl_consultPeople.setModel(model1);
         } else {
+            DefaultTableModel model = model1;
+            model.setRowCount(0);
             // Filtra y muestra solo los datos que coincidan con la entrada del usuario
             for (Clients person : clients) {
-                if (person.getId().contains(input) || person.getName().contains(input)) {
+                System.out.println("Input: " + input);
+                System.out.println("Person ID: " + person.getId());
+                System.out.println("Person Name: " + person.getName());
+                if (person.getId().toLowerCase().contains(input.toLowerCase()) || person.getName().toLowerCase().contains(input.toLowerCase())) {
                     model.addRow(new Object[]{person.getId(), person.getName()});
+
                 }
             }
-           tbl_consultPeople.setModel(model);
-        }  
-    }//GEN-LAST:event_txt_consultPeopleKeyTyped
+            tbl_consultPeople.setModel(model);
+        }
+    }//GEN-LAST:event_txt_consultPeopleKeyReleased
+
+    private void btn_addBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addBillsActionPerformed
+        Product product = productsByType.get(cbx_products.getSelectedIndex());
+        productForBill.add(product);
+        model1 = (DefaultTableModel) tbl_previewBills.getModel();
+        model1.addRow(new Object[]{product.getId(),
+            product.getName(),
+            txt_cantity.getValue(),
+            txt_totalPrice.getText()});
+
+        tbl_previewBills.setModel(model1);
+
+    }//GEN-LAST:event_btn_addBillsActionPerformed
 
     /**
      * @param args the command line arguments
