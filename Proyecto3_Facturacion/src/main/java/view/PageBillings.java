@@ -7,8 +7,12 @@ package view;
 import DB.CrudBD;
 import control.Clients;
 import control.UseComponents;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Product;
@@ -56,6 +60,7 @@ public class PageBillings extends javax.swing.JFrame {
                 receipt.getDate()});
         }
         tbl_consultReceipts.setModel(model2);
+
     }
 
     /**
@@ -95,16 +100,15 @@ public class PageBillings extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_consultReceipts = new javax.swing.JTable();
-        spn_billDate1 = new javax.swing.JSpinner();
         btn_filter = new javax.swing.JButton();
         lbl_intervalDates = new javax.swing.JLabel();
-        lbl_billPersonType = new javax.swing.JLabel();
-        cbx_billPersonType = new javax.swing.JComboBox<>();
         lbl_billDocument = new javax.swing.JLabel();
-        txt_billDocument = new javax.swing.JTextField();
-        spn_billDate2 = new javax.swing.JSpinner();
+        txt_idClient = new javax.swing.JTextField();
         btn_generatePdf = new javax.swing.JButton();
         btn_menu2 = new javax.swing.JButton();
+        jdc_date1 = new com.toedter.calendar.JDateChooser();
+        jdc_date2 = new com.toedter.calendar.JDateChooser();
+        btn_cleanfilter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -314,25 +318,21 @@ public class PageBillings extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_consultReceipts);
 
-        spn_billDate1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613340000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
-
         btn_filter.setBackground(new java.awt.Color(48, 153, 210));
         btn_filter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_filter.setForeground(new java.awt.Color(255, 255, 255));
         btn_filter.setText("Filtrar");
+        btn_filter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_filterActionPerformed(evt);
+            }
+        });
 
         lbl_intervalDates.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_intervalDates.setText("Ingresar Intervalo de Fechas");
 
-        lbl_billPersonType.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_billPersonType.setText("Tipo de Persona");
-
-        cbx_billPersonType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Persona Natural", "Persona Juridica" }));
-
         lbl_billDocument.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_billDocument.setText("Ingresar Documento");
-
-        spn_billDate2.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613460000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
 
         btn_generatePdf.setBackground(new java.awt.Color(255, 255, 204));
         btn_generatePdf.setText("Generar PDF");
@@ -342,6 +342,20 @@ public class PageBillings extends javax.swing.JFrame {
         btn_menu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_menu2ActionPerformed(evt);
+            }
+        });
+
+        jdc_date1.setDateFormatString("yyyy-MM-dd");
+
+        jdc_date2.setDateFormatString("yyyy-MM-dd");
+
+        btn_cleanfilter.setBackground(new java.awt.Color(255, 153, 51));
+        btn_cleanfilter.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_cleanfilter.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cleanfilter.setText("Limpiar Filtro");
+        btn_cleanfilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cleanfilterActionPerformed(evt);
             }
         });
 
@@ -358,23 +372,22 @@ public class PageBillings extends javax.swing.JFrame {
                         .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_billPersonType)
-                            .addComponent(cbx_billPersonType, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_billDocument)
-                            .addComponent(txt_billDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                            .addComponent(txt_idClient, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(lbl_intervalDates))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(spn_billDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(spn_billDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(180, 180, 180)
+                                .addComponent(lbl_intervalDates)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jdc_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jdc_date2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cleanfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -385,24 +398,27 @@ public class PageBillings extends javax.swing.JFrame {
                     .addComponent(btn_menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_billPersonType)
-                        .addGap(4, 4, 4)
-                        .addComponent(cbx_billPersonType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_intervalDates)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jdc_date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jdc_date2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_cleanfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbl_billDocument)
-                        .addGap(4, 4, 4)
-                        .addComponent(txt_billDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_intervalDates)
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spn_billDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spn_billDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn_filter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_idClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
 
         jTabbedPane1.addTab("Consultar Facturas", jPanel1);
@@ -415,7 +431,7 @@ public class PageBillings extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         pack();
@@ -536,6 +552,94 @@ public class PageBillings extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_addReceiptActionPerformed
 
+    private void btn_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filterActionPerformed
+        if (txt_idClient.getText().isBlank() && jdc_date1.getDate()==null && jdc_date2.getDate()==null) {
+            JOptionPane.showMessageDialog(null, "Los filtros estan vacios");
+        } else if (txt_idClient.getText().isBlank()) {
+            String input = txt_idClient.getText();
+            model2.setRowCount(0);
+            Iterator<Receipt> iterator2 = receipts.iterator();
+            while (iterator2.hasNext()) {
+                Receipt receipt = iterator2.next();
+                System.out.println(receipt.getDate());
+                try {
+                    if (UseComponents.validateDate(jdc_date1.getDate(), jdc_date2.getDate(), new SimpleDateFormat("yyyy-MM-dd").parse(receipt.getDate()))) {
+                        model2.addRow(new Object[]{
+                            receipt.getNumReceipt(),
+                            receipt.getTypeClient(),
+                            receipt.getNameClient(),
+                            receipt.getIdClient(),
+                            receipt.getDate()});
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(PageBillings.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            tbl_consultReceipts.setModel(model2);
+        } else if (jdc_date1.getDate()==null && jdc_date2.getDate()==null) {
+            String input = txt_idClient.getText();
+            model2.setRowCount(0);
+            Iterator<Receipt> iterator2 = receipts.iterator();
+            while (iterator2.hasNext()) {
+                Receipt receipt = iterator2.next();
+                System.out.println(receipt.getDate());
+                if (receipt.getIdClient().contains(input)) {
+                    model2.addRow(new Object[]{
+                        receipt.getNumReceipt(),
+                        receipt.getTypeClient(),
+                        receipt.getNameClient(),
+                        receipt.getIdClient(),
+                        receipt.getDate()});
+                }
+            }
+            tbl_consultReceipts.setModel(model2);
+        } else {
+            String input = txt_idClient.getText();
+            model2.setRowCount(0);
+            Iterator<Receipt> iterator2 = receipts.iterator();
+            while (iterator2.hasNext()) {
+                Receipt receipt = iterator2.next();
+                System.out.println(receipt.getDate());
+                try {
+                    if (UseComponents.validateDate(jdc_date1.getDate(), jdc_date2.getDate(), new SimpleDateFormat("yyyy-MM-dd").parse(receipt.getDate())) && receipt.getIdClient().contains(input)) {
+                        model2.addRow(new Object[]{
+                            receipt.getNumReceipt(),
+                            receipt.getTypeClient(),
+                            receipt.getNameClient(),
+                            receipt.getIdClient(),
+                            receipt.getDate()});
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(PageBillings.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            tbl_consultReceipts.setModel(model2);
+        }
+
+
+    }//GEN-LAST:event_btn_filterActionPerformed
+
+    private void btn_cleanfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cleanfilterActionPerformed
+        model2.setRowCount(0);
+        model2 = (DefaultTableModel) tbl_consultReceipts.getModel();
+        Iterator<Receipt> iterator2 = receipts.iterator();
+        while (iterator2.hasNext()) {
+            Receipt receipt = iterator2.next();
+            model2.addRow(new Object[]{
+                receipt.getNumReceipt(),
+                receipt.getTypeClient(),
+                receipt.getNameClient(),
+                receipt.getIdClient(),
+                receipt.getDate()});
+        }
+        tbl_consultReceipts.setModel(model2);
+
+        jdc_date1.setDate(null);
+        jdc_date2.setDate(null);
+        txt_idClient.setText("");
+
+    }//GEN-LAST:event_btn_cleanfilterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -574,11 +678,11 @@ public class PageBillings extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addProduct;
     private javax.swing.JButton btn_addReceipt;
+    private javax.swing.JButton btn_cleanfilter;
     private javax.swing.JButton btn_filter;
     private javax.swing.JButton btn_generatePdf;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_menu2;
-    private javax.swing.JComboBox<String> cbx_billPersonType;
     private javax.swing.JComboBox<String> cbx_products;
     private javax.swing.JComboBox<String> cbx_typeProducts;
     private javax.swing.JPanel jPanel1;
@@ -589,8 +693,9 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private com.toedter.calendar.JDateChooser jdc_date1;
+    private com.toedter.calendar.JDateChooser jdc_date2;
     private javax.swing.JLabel lbl_billDocument;
-    private javax.swing.JLabel lbl_billPersonType;
     private javax.swing.JLabel lbl_cantity;
     private javax.swing.JLabel lbl_consultPeople;
     private javax.swing.JLabel lbl_infoBills;
@@ -600,14 +705,12 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_totalPrice;
     private javax.swing.JLabel lbl_typeProducts;
     private javax.swing.JLabel lbl_unitPrice;
-    private javax.swing.JSpinner spn_billDate1;
-    private javax.swing.JSpinner spn_billDate2;
     private javax.swing.JTable tbl_consultPeople;
     private javax.swing.JTable tbl_consultReceipts;
     private javax.swing.JTable tbl_previewBills;
-    private javax.swing.JTextField txt_billDocument;
     private javax.swing.JSpinner txt_cantity;
     private javax.swing.JTextField txt_consultPeople;
+    private javax.swing.JTextField txt_idClient;
     private javax.swing.JTextField txt_priceProducts;
     private javax.swing.JTextField txt_totalPrice;
     // End of variables declaration//GEN-END:variables

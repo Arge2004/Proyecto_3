@@ -4,6 +4,9 @@
  */
 package control;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -23,15 +26,15 @@ public class UseComponents {
             textfield.setText("");
         }
     }
-    
-    public static boolean validateIsNumber(javax.swing.JTextField... textfields){
-        try{
-            for(JTextField textfield: textfields){
+
+    public static boolean validateIsNumber(javax.swing.JTextField... textfields) {
+        try {
+            for (JTextField textfield : textfields) {
                 int number = Integer.parseInt(textfield.getText());
             }
             return true;
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,"¡Debes Ingresar Numeros en los Campos de Documento/NIT, Teléfono y Codigo Postal!");
+            JOptionPane.showMessageDialog(null, "¡Debes Ingresar Numeros en los Campos de Documento/NIT, Teléfono y Codigo Postal!");
             return false;
         }
     }
@@ -41,15 +44,15 @@ public class UseComponents {
         for (JTextField textfield : textfields) {
             if (textfield.getText().isBlank()) {
                 flag = false; //si hay uno vacio entonces flag se vuelve false
-                
+
             }
         }
-        if (flag==false) { //se valida si hay uno vacio
-            JOptionPane.showMessageDialog(null,"¡Debes Llenar Todos los Campos!");
+        if (flag == false) { //se valida si hay uno vacio
+            JOptionPane.showMessageDialog(null, "¡Debes Llenar Todos los Campos!");
             return true;
         } else {
-            if (combobox1.getSelectedIndex()==0){
-                JOptionPane.showMessageDialog(null,"¡Debes Llenar Todos los Campos!");
+            if (combobox1.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "¡Debes Llenar Todos los Campos!");
                 return true;
             } else {
                 return false;
@@ -78,4 +81,13 @@ public class UseComponents {
         textfield.setEnabled(false);
         combobox.setEnabled(false);
     }
+
+    public static boolean validateDate(Date fechaInicio, Date fechaFin, Date fechaAComparar) {
+        if (fechaFin.equals(fechaInicio) && fechaFin.equals(fechaAComparar)) {
+            return true;
+        }
+        return (fechaAComparar.after(fechaInicio) || fechaAComparar.equals(fechaInicio))
+                && (fechaAComparar.before(fechaFin) || fechaAComparar.equals(fechaFin));
+    }
+
 }
