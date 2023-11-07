@@ -286,7 +286,7 @@ public class PageClients extends javax.swing.JFrame {
                         txt_addressState,
                         txt_addressPostalCode
                 );
-                if (!naturalFlag) {
+                if (!naturalFlag && UseComponents.validateIsNumber(txt_document, txt_phone, txt_addressPostalCode)) {
                     Client clientNatural = new ClientNatural(
                             txt_name.getText(),
                             txt_lastName.getText(),
@@ -316,7 +316,7 @@ public class PageClients extends javax.swing.JFrame {
                         txt_addressState,
                         txt_addressPostalCode
                 );
-                if (!legalFlag) {
+                if (!legalFlag && UseComponents.validateIsNumber(txt_document, txt_phone, txt_addressPostalCode)) {
                     Client clientLegal = new ClientLegal(
                             txt_name.getText(),
                             txt_phone.getText(),

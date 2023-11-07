@@ -23,12 +23,25 @@ public class UseComponents {
             textfield.setText("");
         }
     }
+    
+    public static boolean validateIsNumber(javax.swing.JTextField... textfields){
+        try{
+            for(JTextField textfield: textfields){
+                int number = Integer.parseInt(textfield.getText());
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,"¡Debes Ingresar Numeros en los Campos de Documento/NIT, Teléfono y Codigo Postal!");
+            return false;
+        }
+    }
 
     public static boolean validateEmptyFields(javax.swing.JComboBox<String> combobox1, javax.swing.JTextField... textfields) {
         boolean flag = true;
         for (JTextField textfield : textfields) {
             if (textfield.getText().isBlank()) {
                 flag = false; //si hay uno vacio entonces flag se vuelve false
+                
             }
         }
         if (flag==false) { //se valida si hay uno vacio
