@@ -7,7 +7,10 @@ package view;
 import DB.ConexionDB;
 import DB.CrudBD;
 import control.Clients;
+import control.UseComponents;
+import java.awt.Point;
 import java.sql.SQLException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,7 +44,6 @@ public class PageClients extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lbl_adress = new javax.swing.JLabel();
@@ -82,14 +84,6 @@ public class PageClients extends javax.swing.JFrame {
         jLabel13.setText("<html> <center>Ingrese Informacion <br> de la Persona </html>");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("X");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -97,17 +91,13 @@ public class PageClients extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jLabel13)
-                .addGap(40, 40, 40)
-                .addComponent(jButton1)
-                .addGap(17, 17, 17))
+                .addGap(80, 80, 80))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)))
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(242, 242, 242));
@@ -130,11 +120,16 @@ public class PageClients extends javax.swing.JFrame {
 
         lbl_documentType.setText("Tipo de Documento");
 
-        lbl_lastName.setText("Apellidos");
+        lbl_lastName.setText("Apellido");
 
-        lbl_name.setText("Nombres");
+        lbl_name.setText("Nombre");
 
         cbx_personType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Persona Natural", "Persona Juridica" }));
+        cbx_personType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_personTypeActionPerformed(evt);
+            }
+        });
 
         lbl_personType.setText("Tipo de Persona");
 
@@ -319,9 +314,40 @@ public class PageClients extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_registroClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cbx_personTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_personTypeActionPerformed
+        //por cada cambio se vacian todos los campos
+        UseComponents.deleteFields(cbx_documentType,
+                txt_name,
+                txt_lastName,
+                txt_document,
+                txt_phone,
+                txt_email,
+                txt_addressCity,
+                txt_addressMunicipality,
+                txt_addressState,
+                txt_addressPostalCode);
+
+        switch (cbx_personType.getSelectedIndex()) {
+            default:
+                //natural
+                UseComponents.naturalType(cbx_documentType,
+                        txt_lastName,
+                        lbl_name,
+                        lbl_lastName,
+                        lbl_documentType,
+                        lbl_document);
+                break;
+            case 2:
+                //juridico
+                UseComponents.legalType(cbx_documentType,
+                        txt_lastName,
+                        lbl_name,
+                        lbl_lastName,
+                        lbl_documentType,
+                        lbl_document);
+                break;
+        }
+    }//GEN-LAST:event_cbx_personTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,7 +389,6 @@ public class PageClients extends javax.swing.JFrame {
     private javax.swing.JButton btn_registroCliente;
     private javax.swing.JComboBox<String> cbx_documentType;
     private javax.swing.JComboBox<String> cbx_personType;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
