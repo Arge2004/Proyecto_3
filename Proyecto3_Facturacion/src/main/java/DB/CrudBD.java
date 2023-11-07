@@ -14,6 +14,7 @@ import model.Client;
 import model.ClientLegal;
 import model.ClientNatural;
 import model.Product;
+import model.ProductForReceipt;
 
 /**
  *
@@ -111,7 +112,6 @@ public class CrudBD {
         return product;
     }
 
-
     public ArrayList<Clients> getClients() {
         ArrayList<Clients> clients = new ArrayList<>();
         try {
@@ -153,6 +153,60 @@ public class CrudBD {
         }
 
         return clients;
+    }
+
+    public void createReceipt(String id) {
+        try {
+            Statement st = conn.getConexion().createStatement();
+            String query;
+            query = "INSERT INTO receipts (id_client) values (?)";
+            ps = conn.getConexion().prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void addProductReceipt(ArrayList<ProductForReceipt> ProductsForReceipt) {
+        int idReceipt = 0;
+
+        try {
+            String query = "SELECT MAX(id_receipt) AS latest_id FROM receipts";
+            PreparedStatement ps = conn.getConexion().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                idReceipt = rs.getInt("latest_id");
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Statement st = conn.getConexion().createStatement();
+            String query;
+
+            query = "INSERT INTO details (id_receipt,id_product, quantity, price) values (?, ?, ?,?)";
+            
+            for (ProductForReceipt productForReceipt: ProductsForReceipt){
+                ps = conn.getConexion().prepareStatement(query);
+                ps.setInt(1, idReceipt);
+                ps.setString(2, productForReceipt.getId());
+                ps.setString(3, productForReceipt.getCantity());
+                ps.setString(4, productForReceipt.getTotalPrice());
+                ps.executeUpdate();
+            }
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
     }
 
 }

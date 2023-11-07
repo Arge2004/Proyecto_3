@@ -12,6 +12,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Product;
+import model.ProductForReceipt;
 
 /**
  *
@@ -23,7 +24,8 @@ public class PageBillings extends javax.swing.JFrame {
     private CrudBD crudBD = new CrudBD();
     private ArrayList<Clients> clients = crudBD.getClients();
     private ArrayList<Product> productsByType = new ArrayList<>();
-    private ArrayList<Product> productForBill = new ArrayList<>();
+    private ArrayList<ProductForReceipt> productsForReceipt = new ArrayList<>();
+    private String idClient;
 
     /**
      * Creates new form PageBillings
@@ -65,16 +67,17 @@ public class PageBillings extends javax.swing.JFrame {
         lbl_cantity = new javax.swing.JLabel();
         txt_totalPrice = new javax.swing.JTextField();
         lbl_totalPrice = new javax.swing.JLabel();
-        btn_addBills = new javax.swing.JButton();
         lbl_infoBills = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbl_consultPeople = new javax.swing.JTable();
         lbl_consultPeople = new javax.swing.JLabel();
         txt_consultPeople = new javax.swing.JTextField();
         txt_cantity = new javax.swing.JSpinner();
+        btn_addProduct = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_previewBills = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        btn_addReceipt = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_consultBills = new javax.swing.JTable();
@@ -145,17 +148,6 @@ public class PageBillings extends javax.swing.JFrame {
         lbl_totalPrice.setText("Precio Total");
         jPanel3.add(lbl_totalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        btn_addBills.setBackground(new java.awt.Color(48, 153, 210));
-        btn_addBills.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        btn_addBills.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addBills.setText("Añadir Factura");
-        btn_addBills.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addBillsActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_addBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 260, 30));
-
         lbl_infoBills.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_infoBills.setText("<html> <center>Ingrese Informacion del Producto <br> y Seleccione a una Persona </html>");
         jPanel3.add(lbl_infoBills, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
@@ -197,6 +189,17 @@ public class PageBillings extends javax.swing.JFrame {
         });
         jPanel3.add(txt_cantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 190, -1));
 
+        btn_addProduct.setBackground(new java.awt.Color(48, 153, 210));
+        btn_addProduct.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_addProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addProduct.setText("Añadir Producto");
+        btn_addProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addProductActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_addProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 260, 30));
+
         tbl_previewBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -212,6 +215,16 @@ public class PageBillings extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btn_addReceipt.setBackground(new java.awt.Color(48, 153, 210));
+        btn_addReceipt.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btn_addReceipt.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addReceipt.setText("Generar Factura");
+        btn_addReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addReceiptActionPerformed(evt);
             }
         });
 
@@ -232,8 +245,11 @@ public class PageBillings extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(286, 286, 286)
+                        .addComponent(btn_addReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +263,10 @@ public class PageBillings extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(lbl_preview)
                 .addGap(4, 4, 4)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_addReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Registrar Facturas", jPanel2);
@@ -369,7 +388,7 @@ public class PageBillings extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
         );
 
         pack();
@@ -417,13 +436,13 @@ public class PageBillings extends javax.swing.JFrame {
 
     private void tbl_consultPeopleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_consultPeopleMouseClicked
         int seleccionFila = tbl_consultPeople.rowAtPoint(evt.getPoint());
-        String selectedId = String.valueOf(tbl_consultPeople.getValueAt(seleccionFila, 0));
-        JOptionPane.showMessageDialog(null, selectedId);
+        idClient = String.valueOf(tbl_consultPeople.getValueAt(seleccionFila, 0));
     }//GEN-LAST:event_tbl_consultPeopleMouseClicked
 
     private void txt_consultPeopleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_consultPeopleKeyReleased
         String input = txt_consultPeople.getText();
-        if (input.equals("")) {
+        if (input.isBlank()) {
+            model1.setRowCount(0);
             model1 = (DefaultTableModel) tbl_consultPeople.getModel();
             Iterator<Clients> iterator = clients.iterator();
             while (iterator.hasNext()) {
@@ -449,9 +468,10 @@ public class PageBillings extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_consultPeopleKeyReleased
 
-    private void btn_addBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addBillsActionPerformed
+    private void btn_addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addProductActionPerformed
         Product product = productsByType.get(cbx_products.getSelectedIndex());
-        productForBill.add(product);
+        ProductForReceipt productForReceipt = new ProductForReceipt(product.getId(),String.valueOf(txt_cantity.getValue()),txt_totalPrice.getText());
+        productsForReceipt.add(productForReceipt);
         model1 = (DefaultTableModel) tbl_previewBills.getModel();
         model1.addRow(new Object[]{product.getId(),
             product.getName(),
@@ -460,7 +480,14 @@ public class PageBillings extends javax.swing.JFrame {
 
         tbl_previewBills.setModel(model1);
 
-    }//GEN-LAST:event_btn_addBillsActionPerformed
+    }//GEN-LAST:event_btn_addProductActionPerformed
+
+    private void btn_addReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addReceiptActionPerformed
+         crudBD.createReceipt(idClient);
+         crudBD.addProductReceipt(productsForReceipt);
+         System.out.println(idClient);
+         JOptionPane.showMessageDialog(null, "Factura Enviada Exitosamente");
+    }//GEN-LAST:event_btn_addReceiptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,7 +525,8 @@ public class PageBillings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_addBills;
+    private javax.swing.JButton btn_addProduct;
+    private javax.swing.JButton btn_addReceipt;
     private javax.swing.JButton btn_filter;
     private javax.swing.JButton btn_generatePdf;
     private javax.swing.JComboBox<String> cbx_billPersonType;
