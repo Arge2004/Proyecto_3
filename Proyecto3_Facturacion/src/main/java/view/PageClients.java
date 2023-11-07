@@ -302,7 +302,9 @@ public class PageClients extends javax.swing.JFrame {
                     }
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
+                    new PageClientsMenu().setVisible(true);
                 }
+                
             }
             case 2 -> {
                 //juridico
@@ -331,12 +333,14 @@ public class PageClients extends javax.swing.JFrame {
                     }
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
+                    new PageClientsMenu().setVisible(true);
                 }
+               
             }
             default -> JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
         }
 
-
+      
     }//GEN-LAST:event_btn_registroClienteActionPerformed
 
     private void cbx_personTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_personTypeActionPerformed

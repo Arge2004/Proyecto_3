@@ -30,4 +30,5 @@ public class ClientLegal extends Client implements Clients {
         return socialReason;
     }
 
+   
 }

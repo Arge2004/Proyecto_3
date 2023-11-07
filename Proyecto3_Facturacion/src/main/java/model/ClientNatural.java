@@ -37,4 +37,6 @@ public class ClientNatural extends Client implements Clients{
         this.name = name;
     }
 
+   
+
 }

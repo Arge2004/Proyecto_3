@@ -13,16 +13,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Product;
 import model.ProductForReceipt;
+import model.Receipt;
 
 /**
  *
  * @author gotle
  */
 public class PageBillings extends javax.swing.JFrame {
-
-    private DefaultTableModel model1;
+    
+    private DefaultTableModel model1, model2;
     private CrudBD crudBD = new CrudBD();
     private ArrayList<Clients> clients = crudBD.getClients();
+    private ArrayList<Receipt> receipts = crudBD.getReceipt();
     private ArrayList<Product> productsByType = new ArrayList<>();
     private ArrayList<ProductForReceipt> productsForReceipt = new ArrayList<>();
     private String idClient;
@@ -39,9 +41,23 @@ public class PageBillings extends javax.swing.JFrame {
             Clients client = iterator.next();
             model1.addRow(new Object[]{client.getId(),
                 client.getName(),});
-
+            
         }
         tbl_consultPeople.setModel(model1);
+        
+        model2 = (DefaultTableModel) tbl_consultReceipts.getModel();
+        Iterator<Receipt> iterator2 = receipts.iterator();
+        while (iterator2.hasNext()) {
+            Receipt receipt = iterator2.next();
+            model2.addRow(new Object[]{
+                receipt.getNumReceipt(),
+                receipt.getTypeClient(),
+                receipt.getNameClient(),
+                receipt.getIdClient(),
+                receipt.getDate()});
+            
+        }
+        tbl_consultReceipts.setModel(model2);
     }
 
     /**
@@ -80,7 +96,7 @@ public class PageBillings extends javax.swing.JFrame {
         tbl_consultPeople = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_consultBills = new javax.swing.JTable();
+        tbl_consultReceipts = new javax.swing.JTable();
         spn_billDate1 = new javax.swing.JSpinner();
         btn_filter = new javax.swing.JButton();
         lbl_intervalDates = new javax.swing.JLabel();
@@ -290,18 +306,15 @@ public class PageBillings extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(870, 620));
         jPanel1.setPreferredSize(new java.awt.Dimension(870, 620));
 
-        tbl_consultBills.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_consultReceipts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Número Factura", "Tipo de Cliente", "Nombre del Cliente", "Documento/NIT", "Fecha"
             }
         ));
-        jScrollPane1.setViewportView(tbl_consultBills);
+        jScrollPane1.setViewportView(tbl_consultReceipts);
 
         spn_billDate1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1672613340000L), new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
 
@@ -477,7 +490,7 @@ public class PageBillings extends javax.swing.JFrame {
                 System.out.println("Person Name: " + person.getName());
                 if (person.getId().toLowerCase().contains(input.toLowerCase()) || person.getName().toLowerCase().contains(input.toLowerCase())) {
                     model.addRow(new Object[]{person.getId(), person.getName()});
-
+                    
                 }
             }
             tbl_consultPeople.setModel(model);
@@ -486,23 +499,39 @@ public class PageBillings extends javax.swing.JFrame {
 
     private void btn_addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addProductActionPerformed
         Product product = productsByType.get(cbx_products.getSelectedIndex());
-        ProductForReceipt productForReceipt = new ProductForReceipt(product.getId(),String.valueOf(txt_cantity.getValue()),txt_totalPrice.getText());
+        ProductForReceipt productForReceipt = new ProductForReceipt(product.getId(), String.valueOf(txt_cantity.getValue()), txt_totalPrice.getText());
         productsForReceipt.add(productForReceipt);
         model1 = (DefaultTableModel) tbl_previewBills.getModel();
         model1.addRow(new Object[]{product.getId(),
             product.getName(),
             txt_cantity.getValue(),
             txt_totalPrice.getText()});
-
+        
         tbl_previewBills.setModel(model1);
 
     }//GEN-LAST:event_btn_addProductActionPerformed
 
     private void btn_addReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addReceiptActionPerformed
-         crudBD.createReceipt(idClient);
-         crudBD.addProductReceipt(productsForReceipt);
-         System.out.println(idClient);
-         JOptionPane.showMessageDialog(null, "Factura Enviada Exitosamente");
+        crudBD.createReceipt(idClient);
+        crudBD.addProductReceipt(productsForReceipt);
+        System.out.println(idClient);
+        JOptionPane.showMessageDialog(null, "Factura Enviada Exitosamente");
+        receipts = crudBD.getReceipt();
+        model2.setRowCount(0);
+        model2 = (DefaultTableModel) tbl_consultReceipts.getModel();
+        Iterator<Receipt> iterator2 = receipts.iterator();
+        while (iterator2.hasNext()) {
+            Receipt receipt = iterator2.next();
+            model2.addRow(new Object[]{
+                receipt.getNumReceipt(),
+                receipt.getTypeClient(),
+                receipt.getNameClient(),
+                receipt.getIdClient(),
+                receipt.getDate()});
+            
+        }
+        tbl_consultReceipts.setModel(model2);
+        
     }//GEN-LAST:event_btn_addReceiptActionPerformed
 
     /**
@@ -571,8 +600,8 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_unitPrice;
     private javax.swing.JSpinner spn_billDate1;
     private javax.swing.JSpinner spn_billDate2;
-    private javax.swing.JTable tbl_consultBills;
     private javax.swing.JTable tbl_consultPeople;
+    private javax.swing.JTable tbl_consultReceipts;
     private javax.swing.JTable tbl_previewBills;
     private javax.swing.JTextField txt_billDocument;
     private javax.swing.JSpinner txt_cantity;

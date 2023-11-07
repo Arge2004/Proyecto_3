@@ -4,11 +4,21 @@
  */
 package view;
 
+import DB.CrudBD;
+import control.Clients;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gotle
  */
 public class PageClientsMenu extends javax.swing.JFrame {
+
+    protected static DefaultTableModel model1;
+    private CrudBD crudBD = new CrudBD();
+    private ArrayList<Clients> clients = crudBD.getClients();
 
     /**
      * Creates new form PageClientsMenu
@@ -16,6 +26,20 @@ public class PageClientsMenu extends javax.swing.JFrame {
     public PageClientsMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        model1 = (DefaultTableModel) tbl_clients.getModel();
+        Iterator<Clients> iterator = clients.iterator();
+        while (iterator.hasNext()) {
+            Clients client = iterator.next();
+            model1.addRow(new Object[]{
+                client.getName(),
+                client.getId(),
+                client.getPhoneNumber(),
+                client.getEmailAddress(),
+                client.getAddress()});
+
+        }
+        tbl_clients.setModel(model1);
+
     }
 
     /**
@@ -29,7 +53,7 @@ public class PageClientsMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_clients = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         lbl_consultPeople = new javax.swing.JLabel();
@@ -44,7 +68,7 @@ public class PageClientsMenu extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(840, 570));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_clients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -52,7 +76,7 @@ public class PageClientsMenu extends javax.swing.JFrame {
                 "Nombre / Razón Social", "ID / NIT", "Teléfono", "Email", "Dirección"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_clients);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 800, 460));
 
@@ -74,6 +98,12 @@ public class PageClientsMenu extends javax.swing.JFrame {
         lbl_consultPeople.setForeground(new java.awt.Color(255, 255, 255));
         lbl_consultPeople.setText("<html> <center>Buscar por <br> Nombre / Documento </html>");
         jPanel2.add(lbl_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txt_consultPeople.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_consultPeopleKeyReleased(evt);
+            }
+        });
         jPanel2.add(txt_consultPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 190, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 102, 102));
@@ -108,7 +138,42 @@ public class PageClientsMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new PageClients().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_consultPeopleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_consultPeopleKeyReleased
+        String input = txt_consultPeople.getText();
+        if (input.isBlank()) {
+            model1.setRowCount(0);
+            model1 = (DefaultTableModel) tbl_clients.getModel();
+            Iterator<Clients> iterator = clients.iterator();
+            while (iterator.hasNext()) {
+                Clients client = iterator.next();
+                model1.addRow(new Object[]{
+                    client.getName(),
+                    client.getId(),
+                    client.getPhoneNumber(),
+                    client.getEmailAddress(),
+                    client.getAddress()
+                    });
+            }
+            tbl_clients.setModel(model1);
+        } else {
+            DefaultTableModel model = model1;
+            model.setRowCount(0);
+            // Filtra y muestra solo los datos que coincidan con la entrada del usuario
+            for (Clients person : clients) {
+                if (person.getId().toLowerCase().contains(input.toLowerCase()) || person.getName().toLowerCase().contains(input.toLowerCase())) {
+                    model.addRow(new Object[]{person.getName(),
+                    person.getId(),
+                    person.getPhoneNumber(),
+                    person.getEmailAddress(),
+                    person.getAddress()});
+                }
+            }
+            tbl_clients.setModel(model);
+        }
+    }//GEN-LAST:event_txt_consultPeopleKeyReleased
 
     /**
      * @param args the command line arguments
@@ -124,16 +189,24 @@ public class PageClientsMenu extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PageClientsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageClientsMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PageClientsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageClientsMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PageClientsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageClientsMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PageClientsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageClientsMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -151,8 +224,8 @@ public class PageClientsMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_consultPeople;
+    private javax.swing.JTable tbl_clients;
     private javax.swing.JTextField txt_consultPeople;
     // End of variables declaration//GEN-END:variables
 }

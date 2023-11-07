@@ -29,11 +29,11 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmailAdress() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAdress(String emailAdress) {
+    public void setEmailAddress(String emailAdress) {
         this.emailAddress = emailAdress;
     }
 
