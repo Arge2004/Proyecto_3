@@ -21,7 +21,47 @@
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
-        </dependency>  
+        </dependency>
+        <dependency>
+            <groupId>CommonCollections</groupId>
+            <artifactId>common-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>CommonsDigester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>CommonsLoggin</groupId>
+            <artifactId>commons-loggin</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>Groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ItextPdf</groupId>
+            <artifactId>itext-pdf</artifactId>
+            <version>5.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>ItextPdfa</groupId>
+            <artifactId>itext-pdfa</artifactId>
+            <version>5.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>JasperReports</groupId>
+            <artifactId>jasper-reports</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>MySQLConnector</groupId>
+            <artifactId>mysql-connector</artifactId>
+            <version>5.0.8</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
