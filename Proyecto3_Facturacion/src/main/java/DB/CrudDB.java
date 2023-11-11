@@ -240,8 +240,8 @@ public class CrudDB {
         }
         return receipts;
     }
-    
-    public Receipt getReceipt(String numReceipt){
+
+    public Receipt getReceipt(String numReceipt) {
         Receipt receipt = new Receipt();
         try {
             String query = "SELECT receipts.*, clients_natural.name AS natural_name, clients_natural.lastName AS natural_lastName, "
@@ -266,8 +266,8 @@ public class CrudDB {
         return receipt;
     }
 
-    public ArrayList<Detail> getDetails(int numReceipt ) {
-        ArrayList<Detail> details = new ArrayList<>();     
+    public ArrayList<Detail> getDetails(int numReceipt) {
+        ArrayList<Detail> details = new ArrayList<>();
         try {
             String query = "SELECT * FROM details WHERE id_receipt = ?";
             ps = conn.getConexion().prepareStatement(query);
@@ -287,5 +287,28 @@ public class CrudDB {
         }
         return details;
     }
-}
 
+    public Boolean validateExistClient(String id) {
+        try {
+            String query = "SELECT * FROM clients_legal WHERE id = ?";
+            ps = conn.getConexion().prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                query = "SELECT * FROM clients_natural WHERE id = ?";
+                ps = conn.getConexion().prepareStatement(query);
+                ps.setString(1, id);
+                rs = ps.executeQuery();
+                if (rs.next()) {;
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+        return false;
+    }
+}

@@ -266,6 +266,7 @@ public class PageClients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registroClienteActionPerformed
+
         CrudDB crudBD = new CrudDB();
         Address address = new Address(
                 txt_addressState.getText(),
@@ -273,6 +274,7 @@ public class PageClients extends javax.swing.JFrame {
                 txt_addressCity.getText(),
                 txt_addressPostalCode.getText()
         );
+
         switch (cbx_personType.getSelectedIndex()) {
             case 1 -> {
                 //natural
@@ -287,24 +289,27 @@ public class PageClients extends javax.swing.JFrame {
                         txt_addressPostalCode
                 );
                 if (!naturalFlag && UseComponents.validateIsNumber(txt_document, txt_phone, txt_addressPostalCode)) {
-                    Client clientNatural = new ClientNatural(
-                            txt_name.getText(),
-                            txt_lastName.getText(),
-                            txt_phone.getText(),
-                            txt_email.getText(),
-                            txt_document.getText(),
-                            address.toString()
-                    );
-                    try {
-                        crudBD.createClient(clientNatural, (Clients) clientNatural);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!crudBD.validateExistClient(txt_document.getText())) {
+                        Client clientNatural = new ClientNatural(
+                                txt_name.getText(),
+                                txt_lastName.getText(),
+                                txt_phone.getText(),
+                                txt_email.getText(),
+                                txt_document.getText(),
+                                address.toString()
+                        );
+                        try {
+                            crudBD.createClient(clientNatural, (Clients) clientNatural);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        this.dispose();
+                        JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
+                        new PageClientsMenu().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡El cliente ya existe!");
                     }
-                    this.dispose();
-                    JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
-                    new PageClientsMenu().setVisible(true);
                 }
-                
             }
             case 2 -> {
                 //juridico
@@ -319,28 +324,32 @@ public class PageClients extends javax.swing.JFrame {
                         txt_addressPostalCode
                 );
                 if (!legalFlag && UseComponents.validateIsNumber(txt_document, txt_phone, txt_addressPostalCode)) {
-                    Client clientLegal = new ClientLegal(
-                            txt_name.getText(),
-                            txt_phone.getText(),
-                            txt_email.getText(),
-                            txt_document.getText(),
-                            address.toString()
-                    );
-                    try {
-                        crudBD.createClient(clientLegal, (Clients) clientLegal);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!crudBD.validateExistClient(txt_document.getText())) {
+                        Client clientLegal = new ClientLegal(
+                                txt_name.getText(),
+                                txt_phone.getText(),
+                                txt_email.getText(),
+                                txt_document.getText(),
+                                address.toString()
+                        );
+                        try {
+                            crudBD.createClient(clientLegal, (Clients) clientLegal);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PageClients.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        this.dispose();
+                        JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
+                        new PageClientsMenu().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡El cliente ya existe!");
                     }
-                    this.dispose();
-                    JOptionPane.showMessageDialog(null, "¡Cliente Creado Exitosamente!");
-                    new PageClientsMenu().setVisible(true);
                 }
-               
             }
-            default -> JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
+            default ->
+                JOptionPane.showMessageDialog(null, "¡No has seleccionado ningun tipo de Cliente!");
         }
 
-      
+
     }//GEN-LAST:event_btn_registroClienteActionPerformed
 
     private void cbx_personTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_personTypeActionPerformed

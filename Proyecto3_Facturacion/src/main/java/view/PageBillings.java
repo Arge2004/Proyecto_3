@@ -562,12 +562,14 @@ public class PageBillings extends javax.swing.JFrame {
                         receipt.getDate()});
                 }
                 tbl_consultReceipts.setModel(model2);
+                model1.setRowCount(0);
             } else {
                 JOptionPane.showMessageDialog(null, "¡Debes Seleccionar un Cliente!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "¡Debes Tener Productos/Servicios Añadidos!");
         }
+        
     }//GEN-LAST:event_btn_addReceiptActionPerformed
 
     private void btn_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filterActionPerformed
