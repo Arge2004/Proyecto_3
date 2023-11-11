@@ -135,7 +135,7 @@ public class CrudDB {
 
     public Client getClient(String id) {
         try {
-            String query = "SELECT * FROM clients_legal WHERE id = ? ";
+            String query = "SELECT * FROM clients_legal WHERE id = ?";
             ps = conn.getConexion().prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -149,8 +149,9 @@ public class CrudDB {
                 );
                 return client;
             } else {
-                query = "SELECT * FROM clients_natural";
+                query = "SELECT * FROM clients_natural WHERE id = ?";
                 ps = conn.getConexion().prepareStatement(query);
+                ps.setString(1, id);
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     Client client = new ClientNatural(

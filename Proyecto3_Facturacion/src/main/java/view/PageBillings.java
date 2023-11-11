@@ -32,7 +32,7 @@ public class PageBillings extends javax.swing.JFrame {
     private ArrayList<Receipt> receipts = crudBD.getReceipts();
     private ArrayList<Product> productsByType = new ArrayList<>();
     private ArrayList<ProductForReceipt> productsForReceipt = new ArrayList<>();
-    private String idClient;
+    private String idClient, idReceipt;
 
     /**
      * Creates new form PageBillings
@@ -659,20 +659,29 @@ public class PageBillings extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cleanfilterActionPerformed
 
     private void btn_generateJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateJSONActionPerformed
-        int[] selectedRows = tbl_consultReceipts.getSelectedRows();
-        ProcessJSON json = new ProcessJSON();
-        ArrayList<String> ids = new ArrayList<>();
-        for (int row : selectedRows) {
-            idClient = String.valueOf(tbl_consultReceipts.getValueAt(row, 0));
-            ids.add(idClient);
+        if (tbl_consultReceipts.getSelectedRow() != -1) {
+            int[] selectedRows = tbl_consultReceipts.getSelectedRows();
+            ProcessJSON json = new ProcessJSON();
+            ArrayList<String> ids = new ArrayList<>();
+            for (int row : selectedRows) {
+                idClient = String.valueOf(tbl_consultReceipts.getValueAt(row, 0));
+                ids.add(idClient);
+            }
+            json.GrabarJsons(ids);
+            JOptionPane.showMessageDialog(null, "¡La Factura en Formato JSON fue Generada con Éxito!");
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Debes Seleccionar una o varias Facturas!");
         }
-        json.GrabarJsons(ids);
-        JOptionPane.showMessageDialog(null, "¡La Factura fue Generada con Éxito!");
     }//GEN-LAST:event_btn_generateJSONActionPerformed
 
     private void btn_generatePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdfActionPerformed
-        idClient = String.valueOf(tbl_consultReceipts.getValueAt(tbl_consultReceipts.getSelectedRow(), 0));
-        new PDF(idClient);
+        if (tbl_consultReceipts.getSelectedRow() != -1) {
+            idReceipt = String.valueOf(tbl_consultReceipts.getValueAt(tbl_consultReceipts.getSelectedRow(), 0));
+            new PDF(idReceipt);
+            JOptionPane.showMessageDialog(null, "¡La Factura en Formato PDF fue Generada con Éxito!");
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Debes Seleccionar una Factura!");
+        }
     }//GEN-LAST:event_btn_generatePdfActionPerformed
 
     /**

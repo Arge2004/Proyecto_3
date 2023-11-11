@@ -21,6 +21,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +53,8 @@ public class ProcessPDF {
         CrudDB crudDB = new CrudDB();
         DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) table.getModel();
-        Clients client = (Clients) crudDB.getClient(id);
+        Receipt receipt = crudDB.getReceipt(id);
+        Clients client = (Clients) crudDB.getClient(receipt.getIdClient());
         model.setValueAt(id, 0, 3);
         model.setValueAt(client.getName(), 5, 1);
         model.setValueAt(client.getId(), 6, 1);
