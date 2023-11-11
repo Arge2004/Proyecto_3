@@ -5,6 +5,7 @@
 package view;
 
 import DB.CrudBD;
+import JSON.ProcessJSON;
 import control.Clients;
 import control.UseComponents;
 import java.text.ParseException;
@@ -28,7 +29,7 @@ public class PageBillings extends javax.swing.JFrame {
     private DefaultTableModel model1, model2;
     private CrudBD crudBD = new CrudBD();
     private ArrayList<Clients> clients = crudBD.getClients();
-    private ArrayList<Receipt> receipts = crudBD.getReceipt();
+    private ArrayList<Receipt> receipts = crudBD.getReceipts();
     private ArrayList<Product> productsByType = new ArrayList<>();
     private ArrayList<ProductForReceipt> productsForReceipt = new ArrayList<>();
     private String idClient;
@@ -63,6 +64,8 @@ public class PageBillings extends javax.swing.JFrame {
 
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,6 +112,7 @@ public class PageBillings extends javax.swing.JFrame {
         jdc_date1 = new com.toedter.calendar.JDateChooser();
         jdc_date2 = new com.toedter.calendar.JDateChooser();
         btn_cleanfilter = new javax.swing.JButton();
+        btn_generatePdf1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -359,6 +363,14 @@ public class PageBillings extends javax.swing.JFrame {
             }
         });
 
+        btn_generatePdf1.setBackground(new java.awt.Color(204, 255, 204));
+        btn_generatePdf1.setText("Generar JSON");
+        btn_generatePdf1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_generatePdf1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -369,6 +381,8 @@ public class PageBillings extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_generatePdf1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,9 +410,10 @@ public class PageBillings extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_generatePdf1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -530,7 +545,7 @@ public class PageBillings extends javax.swing.JFrame {
                 crudBD.addProductReceipt(productsForReceipt);
                 System.out.println(idClient);
                 JOptionPane.showMessageDialog(null, "Factura Enviada Exitosamente");
-                receipts = crudBD.getReceipt();
+                receipts = crudBD.getReceipts();
                 model2.setRowCount(0);
                 model2 = (DefaultTableModel) tbl_consultReceipts.getModel();
                 Iterator<Receipt> iterator2 = receipts.iterator();
@@ -640,6 +655,18 @@ public class PageBillings extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_cleanfilterActionPerformed
 
+    private void btn_generatePdf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdf1ActionPerformed
+        int[] selectedRows = tbl_consultReceipts.getSelectedRows();
+        ProcessJSON json = new ProcessJSON();
+        ArrayList<String> ids = new ArrayList<>();
+        for(int row: selectedRows){
+            idClient = String.valueOf(tbl_consultReceipts.getValueAt(row, 0));
+            ids.add(idClient);
+        }
+        json.GrabarJsons(ids);
+        JOptionPane.showMessageDialog(null,"¡La Factura fue Generada con Éxito!");
+    }//GEN-LAST:event_btn_generatePdf1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -681,6 +708,7 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JButton btn_cleanfilter;
     private javax.swing.JButton btn_filter;
     private javax.swing.JButton btn_generatePdf;
+    private javax.swing.JButton btn_generatePdf1;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_menu2;
     private javax.swing.JComboBox<String> cbx_products;

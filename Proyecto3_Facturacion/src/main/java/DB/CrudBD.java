@@ -81,7 +81,7 @@ public class CrudBD {
     public Product getProduct(String id) {
         Product product = new Product();
         try {
-            String query = "SELECT * FROM products WHERE type_product = ?";
+            String query = "SELECT * FROM products WHERE id = ?";
             ps = conn.getConexion().prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -216,7 +216,7 @@ public class CrudBD {
         }
     }
 
-    public ArrayList<Receipt> getReceipt() {
+    public ArrayList<Receipt> getReceipts() {
         ArrayList<Receipt> receipts = new ArrayList<>();
         try {
             String query = "SELECT receipts.*, clients_natural.name AS natural_name, clients_natural.lastName AS natural_lastName, clients_legal.socialReason AS legal_name FROM receipts LEFT JOIN clients_natural ON receipts.id_client = clients_natural.id LEFT JOIN clients_legal ON receipts.id_client = clients_legal.id";
@@ -238,6 +238,31 @@ public class CrudBD {
             System.out.println(e);
         }
         return receipts;
+    }
+    
+    public Receipt getReceipt(String numReceipt){
+        Receipt receipt = new Receipt();
+        try {
+            String query = "SELECT receipts.*, clients_natural.name AS natural_name, clients_natural.lastName AS natural_lastName, "
+                    + "clients_legal.socialReason AS legal_name FROM receipts LEFT JOIN clients_natural "
+                    + "ON receipts.id_client = clients_natural.id LEFT JOIN clients_legal "
+                    + "ON receipts.id_client = clients_legal.id WHERE receipts.id_receipt = ?";
+            ps = conn.getConexion().prepareStatement(query);
+            ps.setString(1, numReceipt);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                receipt.setNumReceipt(rs.getString("id_receipt"));
+                String nameClient = rs.getString("natural_name") != null ? rs.getString("natural_name") + " " + rs.getString("natural_lastName") : rs.getString("legal_name");
+                receipt.setNameClient(nameClient);
+                receipt.setIdClient(rs.getString("id_client"));
+                receipt.setDate(rs.getString("date"));
+                String typeClient = rs.getString("natural_name") != null ? "Cliente Natural" : "Cliente Jurídico";
+                receipt.setTypeClient(typeClient);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return receipt;
     }
 
     public ArrayList<Detail> getDetails(int numReceipt ) {

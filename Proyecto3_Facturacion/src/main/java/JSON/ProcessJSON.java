@@ -4,37 +4,62 @@
  */
 package JSON;
 
+import DB.CrudBD;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import model.Detail;
+import model.Product;
+import model.Receipt;
 
 /**
  *
  * @author argen
  */
 public class ProcessJSON {
-    //Esstructura base
-    public void GrabarJson() {
 
-        // Crear un objeto Gson
-        Gson gson = new Gson();
+    public void GrabarJsons(ArrayList<String> list) {
+        // Crear un objeto Gson con formato bonito
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        // Crear un objeto para convertir a JSON
-        Persona p1 = new Persona();
-        p1.setNombre("Pedro");
-        p1.setApellidos("Perez");
-        p1.setEdad(30);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Receipts.json"))) {
+            for (String numReceipt : list) {
+                // Acceder a la base de datos
+                CrudBD crudDB = new CrudBD();
 
-        // Convertir el objeto a JSON
-        String json = gson.toJson(p1);
+                // Obtener la información
+                Receipt receipt = crudDB.getReceipt(numReceipt);
+                ArrayList<Detail> details = crudDB.getDetails(Integer.parseInt(numReceipt));
+                ArrayList<Product> products = new ArrayList<>();
 
-        // Escribir el JSON en un archivo
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("archivo.json"))) {
-            bw.write(json);
+                for (Detail detail : details) {
+                    String numRpt = detail.getIdProduct();
+                    Product product = crudDB.getProduct(numRpt);
+                    products.add(product);
+                }
+
+                System.out.println(details);
+                System.out.println(products);
+
+                // Crear un objeto JSON que contenga la nueva información
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.add("receipt", gson.toJsonTree(receipt));
+                jsonObject.add("details", gson.toJsonTree(details));
+                jsonObject.add("products", gson.toJsonTree(products));
+
+                // Convertir el objeto JSON a una cadena
+                String json = gson.toJson(jsonObject);
+
+                // Escribir el JSON en el archivo (modo de anexar)
+                bw.write(json);
+                bw.newLine(); // Agregar una nueva línea después de cada iteración
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
