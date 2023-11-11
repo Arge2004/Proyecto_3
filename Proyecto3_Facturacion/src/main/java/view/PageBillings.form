@@ -597,6 +597,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Generar PDF"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_generatePdfActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_menu2">
               <Properties>

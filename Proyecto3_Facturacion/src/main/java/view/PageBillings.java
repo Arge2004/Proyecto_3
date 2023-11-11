@@ -19,6 +19,20 @@ import javax.swing.table.DefaultTableModel;
 import model.Product;
 import model.ProductForReceipt;
 import model.Receipt;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import DB.ConexionDB;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -340,6 +354,11 @@ public class PageBillings extends javax.swing.JFrame {
 
         btn_generatePdf.setBackground(new java.awt.Color(255, 255, 204));
         btn_generatePdf.setText("Generar PDF");
+        btn_generatePdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_generatePdfActionPerformed(evt);
+            }
+        });
 
         btn_menu2.setBackground(new java.awt.Color(255, 102, 102));
         btn_menu2.setText("Menu");
@@ -666,6 +685,38 @@ public class PageBillings extends javax.swing.JFrame {
         json.GrabarJsons(ids);
         JOptionPane.showMessageDialog(null,"¡La Factura fue Generada con Éxito!");
     }//GEN-LAST:event_btn_generatePdf1ActionPerformed
+
+    private void btn_generatePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdfActionPerformed
+        try {
+        ConexionDB con = new ConexionDB();
+        Connection conn = con.getConexion();
+
+        String sql = "SELECT id_receipt FROM receipts";
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                int id = rs.getInt("id_receipt");
+
+                 InputStream inputStream = getClass().getResourceAsStream("/reports/Report.jasper");
+                JasperReport reporte = (JasperReport) JRLoader.loadObject(inputStream);
+                
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("ID_PARAM", id);
+
+                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, conn);
+
+                JasperViewer view = new JasperViewer(jprint, false);
+
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+                view.setVisible(true);
+            }
+        }
+    } catch (JRException | SQLException ex) {
+    }
+    }//GEN-LAST:event_btn_generatePdfActionPerformed
 
     /**
      * @param args the command line arguments

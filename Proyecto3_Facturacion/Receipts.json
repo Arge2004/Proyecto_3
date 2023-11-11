@@ -1,28 +1,41 @@
 {
   "receipt": {
-    "numReceipt": "13",
-    "nameClient": "Gamers Colombia",
-    "idClient": "3451455",
-    "typeClient": "Cliente Jurídico",
-    "date": "2023-11-07"
+    "numReceipt": "14",
+    "nameClient": "Mateo Lotero",
+    "idClient": "123231",
+    "typeClient": "Cliente Natural",
+    "date": "2023-10-31"
   },
   "details": [
     {
-      "numDetail": "29",
-      "idReceipt": "13",
+      "numDetail": "31",
+      "idReceipt": "14",
+      "idProduct": "4",
+      "quantity": "1",
+      "price": "150000"
+    },
+    {
+      "numDetail": "32",
+      "idReceipt": "14",
       "idProduct": "26",
       "quantity": "2",
       "price": "160000"
     },
     {
-      "numDetail": "30",
-      "idReceipt": "13",
-      "idProduct": "4",
-      "quantity": "1",
-      "price": "150000"
+      "numDetail": "33",
+      "idReceipt": "14",
+      "idProduct": "26",
+      "quantity": "2",
+      "price": "160000"
     }
   ],
   "products": [
+    {
+      "Id": "4",
+      "name": "Ultrasonido",
+      "price": 150000,
+      "typeProduct": "Imagenología"
+    },
     {
       "Id": "26",
       "name": "Hematología",
@@ -30,61 +43,9 @@
       "typeProduct": "Exámenes Clínicos"
     },
     {
-      "Id": "4",
-      "name": "Ultrasonido",
-      "price": 150000,
-      "typeProduct": "Imagenología"
-    }
-  ]
-}
-{
-  "receipt": {
-    "numReceipt": "15",
-    "nameClient": "Lucy Morales",
-    "idClient": "312341",
-    "typeClient": "Cliente Natural",
-    "date": "2023-10-23"
-  },
-  "details": [
-    {
-      "numDetail": "34",
-      "idReceipt": "15",
-      "idProduct": "22",
-      "quantity": "2",
-      "price": "500000"
-    },
-    {
-      "numDetail": "35",
-      "idReceipt": "15",
-      "idProduct": "24",
-      "quantity": "1",
-      "price": "250000"
-    },
-    {
-      "numDetail": "36",
-      "idReceipt": "15",
-      "idProduct": "30",
-      "quantity": "1",
-      "price": "90000"
-    }
-  ],
-  "products": [
-    {
-      "Id": "22",
-      "name": "Consulta de Oftalmología",
-      "price": 250000,
-      "typeProduct": "Consulta"
-    },
-    {
-      "Id": "24",
-      "name": "Consulta de Dermatología",
-      "price": 250000,
-      "typeProduct": "Consulta"
-    },
-    {
-      "Id": "30",
-      "name": "Microbiología",
-      "price": 90000,
+      "Id": "26",
+      "name": "Hematología",
+      "price": 80000,
       "typeProduct": "Exámenes Clínicos"
     }
   ]
