@@ -5,6 +5,7 @@
 package view;
 
 import PDF.ProcessPDF;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,24 +13,34 @@ import javax.swing.table.DefaultTableModel;
  * @author argen
  */
 public class PDF extends javax.swing.JFrame {
-    private String id;
+
+    private ArrayList<String> ids;
     private ProcessPDF pdf = new ProcessPDF();
-    
+    private DefaultTableModel model;
+
     public PDF() {
         initComponents();
     }
-    
-    public PDF(String textReceived){
+
+    public PDF(ArrayList<String> numReceipts) {
         initComponents();
         tableHeader.getColumnModel().getColumn(1).setPreferredWidth(120);
         tableHeader.getColumnModel().getColumn(2).setPreferredWidth(15);
-        tableHeader.getColumnModel().getColumn(3).setPreferredWidth(30);
-        id = textReceived;
-        tablePDF.setModel(pdf.modifyTablePDF(tablePDF, id));
-        DefaultTableModel modelAux= (DefaultTableModel)tableHeader.getModel();
-        tableHeader.setModel(pdf.modifyHeadPDF(tableHeader, id));
-        tablePDF.setModel(pdf.modifyFootPDF(tablePDF, id));
-        pdf.generatePDF(tableHeader, tablePDF);
+        tableHeader.getColumnModel().getColumn(3).setPreferredWidth(30);  
+        model= (DefaultTableModel) tablePDF.getModel();
+        ids= numReceipts;
+        for (String id : ids) {
+            model.setRowCount(1);
+            tablePDF.setModel(pdf.modifyTablePDF(tablePDF, id));
+            tableHeader.setModel(pdf.modifyHeadPDF(tableHeader, id));
+            tablePDF.setModel(pdf.modifyFootPDF(tablePDF, id));
+            pdf.generatePDF(tableHeader,tablePDF, ids.size());
+            ProcessPDF.document.newPage();
+        }
+
+        if (ProcessPDF.document != null) {
+            ProcessPDF.document.close();
+        }
     }
 
     /**

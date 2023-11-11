@@ -16,9 +16,11 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.html.WebColors;
+import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
 
 import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
@@ -28,6 +30,8 @@ import javax.swing.JOptionPane;
  * @author argen
  */
 public class ProcessPDF {
+
+    public static Document document;
 
     public DefaultTableModel modifyTablePDF(javax.swing.JTable table, String id) {
         CrudDB crudDB = new CrudDB();
@@ -99,11 +103,51 @@ public class ProcessPDF {
         return model;
     }
 
-    public void generatePDF(javax.swing.JTable tableHeader, javax.swing.JTable tablePDF) {
+//    public void generatePDF(javax.swing.JTable tableHeader, javax.swing.JTable tablePDF) {
+//        try {
+//            Document doc = new Document();
+//            PdfWriter.getInstance(doc, new FileOutputStream("facturacion.pdf"));
+//            doc.open();
+//
+//            PdfPTable table = new PdfPTable(tableHeader.getColumnCount());
+//            table.getDefaultCell().setBorderColor(BaseColor.WHITE);
+//
+//            for (int x = 0; x < tableHeader.getRowCount(); x++) {
+//                for (int y = 0; y < tableHeader.getColumnCount(); y++) {
+//                    String valor = (tableHeader.getValueAt(x, y) != null) ? tableHeader.getValueAt(x, y).toString() : " ";
+//                    table.addCell(valor);
+//                }
+//            }
+//
+//            PdfPTable table1 = new PdfPTable(tablePDF.getColumnCount());
+//
+//            for (int y = 0; y < tablePDF.getColumnCount(); y++) {
+//                PdfPCell headerCell = new PdfPCell(new Phrase(tablePDF.getColumnName(y)));
+//                headerCell.setBackgroundColor(BaseColor.CYAN); // Cambiar el color de fondo solo para la primera fila
+//                table1.addCell(headerCell);
+//            }
+//
+//            for (int x = 1; x < tablePDF.getRowCount(); x++) {
+//                for (int y = 0; y < tablePDF.getColumnCount(); y++) {
+//                    String valor = (tablePDF.getValueAt(x, y) != null) ? tablePDF.getValueAt(x, y).toString() : " ";
+//                    table1.addCell(valor);
+//                }
+//            }
+//
+//            doc.add(table);
+//            doc.add(table1);
+//            doc.close();
+//        } catch (DocumentException | java.io.FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public void generatePDF(javax.swing.JTable tableHeader, javax.swing.JTable tablePDF, int numPages) {
         try {
-            Document doc = new Document();
-            PdfWriter.getInstance(doc, new FileOutputStream("facturacion.pdf"));
-            doc.open();
+            if (document == null) {
+                document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream("facturacion.pdf"));
+                document.open();
+            }
 
             PdfPTable table = new PdfPTable(tableHeader.getColumnCount());
             table.getDefaultCell().setBorderColor(BaseColor.WHITE);
@@ -130,9 +174,8 @@ public class ProcessPDF {
                 }
             }
 
-            doc.add(table);
-            doc.add(table1);
-            doc.close();
+            document.add(table);
+            document.add(table1);
         } catch (DocumentException | java.io.FileNotFoundException e) {
             e.printStackTrace();
         }

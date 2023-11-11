@@ -677,7 +677,13 @@ public class PageBillings extends javax.swing.JFrame {
     private void btn_generatePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdfActionPerformed
         if (tbl_consultReceipts.getSelectedRow() != -1) {
             idReceipt = String.valueOf(tbl_consultReceipts.getValueAt(tbl_consultReceipts.getSelectedRow(), 0));
-            new PDF(idReceipt);
+            int[] selectedRows = tbl_consultReceipts.getSelectedRows();
+            ArrayList<String> ids = new ArrayList<>();
+            for (int row : selectedRows) {
+                idClient = String.valueOf(tbl_consultReceipts.getValueAt(row, 0));
+                ids.add(idClient);
+            }
+            new PDF(ids);
             JOptionPane.showMessageDialog(null, "¡La Factura en Formato PDF fue Generada con Éxito!");
         } else {
             JOptionPane.showMessageDialog(null, "¡Debes Seleccionar una Factura!");
