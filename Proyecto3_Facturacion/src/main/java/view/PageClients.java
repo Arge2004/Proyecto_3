@@ -5,7 +5,7 @@
 package view;
 
 import DB.ConexionDB;
-import DB.CrudBD;
+import DB.CrudDB;
 import control.Clients;
 import control.UseComponents;
 import java.awt.Point;
@@ -266,7 +266,7 @@ public class PageClients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registroClienteActionPerformed
-        CrudBD crudBD = new CrudBD();
+        CrudDB crudBD = new CrudDB();
         Address address = new Address(
                 txt_addressState.getText(),
                 txt_addressMunicipality.getText(),

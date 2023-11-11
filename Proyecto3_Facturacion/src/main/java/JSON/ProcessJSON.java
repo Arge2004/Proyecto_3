@@ -4,7 +4,7 @@
  */
 package JSON;
 
-import DB.CrudBD;
+import DB.CrudDB;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -29,7 +29,7 @@ public class ProcessJSON {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Receipts.json"))) {
             for (String numReceipt : list) {
                 // Acceder a la base de datos
-                CrudBD crudDB = new CrudBD();
+                CrudDB crudDB = new CrudDB();
 
                 // Obtener la información
                 Receipt receipt = crudDB.getReceipt(numReceipt);

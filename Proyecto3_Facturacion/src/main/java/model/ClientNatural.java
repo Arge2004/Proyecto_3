@@ -30,7 +30,7 @@ public class ClientNatural extends Client implements Clients{
 
     @Override
     public String getName() {
-        return name;
+        return name+" "+lastName;
     }
     
     public void setName(String name) {

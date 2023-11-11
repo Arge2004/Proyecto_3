@@ -4,7 +4,7 @@
  */
 package view;
 
-import DB.CrudBD;
+import DB.CrudDB;
 import JSON.ProcessJSON;
 import control.Clients;
 import control.UseComponents;
@@ -27,7 +27,7 @@ import model.Receipt;
 public class PageBillings extends javax.swing.JFrame {
 
     private DefaultTableModel model1, model2;
-    private CrudBD crudBD = new CrudBD();
+    private CrudDB crudBD = new CrudDB();
     private ArrayList<Clients> clients = crudBD.getClients();
     private ArrayList<Receipt> receipts = crudBD.getReceipts();
     private ArrayList<Product> productsByType = new ArrayList<>();
@@ -110,7 +110,7 @@ public class PageBillings extends javax.swing.JFrame {
         jdc_date1 = new com.toedter.calendar.JDateChooser();
         jdc_date2 = new com.toedter.calendar.JDateChooser();
         btn_cleanfilter = new javax.swing.JButton();
-        btn_generatePdf1 = new javax.swing.JButton();
+        btn_generateJSON = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(15, 120, 186));
@@ -366,11 +366,11 @@ public class PageBillings extends javax.swing.JFrame {
             }
         });
 
-        btn_generatePdf1.setBackground(new java.awt.Color(204, 255, 204));
-        btn_generatePdf1.setText("Generar JSON");
-        btn_generatePdf1.addActionListener(new java.awt.event.ActionListener() {
+        btn_generateJSON.setBackground(new java.awt.Color(204, 255, 204));
+        btn_generateJSON.setText("Generar JSON");
+        btn_generateJSON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_generatePdf1ActionPerformed(evt);
+                btn_generateJSONActionPerformed(evt);
             }
         });
 
@@ -384,7 +384,7 @@ public class PageBillings extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_generatePdf1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_generateJSON, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -414,7 +414,7 @@ public class PageBillings extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_generatePdf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_generatePdf1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_generateJSON, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -658,7 +658,7 @@ public class PageBillings extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_cleanfilterActionPerformed
 
-    private void btn_generatePdf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdf1ActionPerformed
+    private void btn_generateJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateJSONActionPerformed
         int[] selectedRows = tbl_consultReceipts.getSelectedRows();
         ProcessJSON json = new ProcessJSON();
         ArrayList<String> ids = new ArrayList<>();
@@ -668,10 +668,11 @@ public class PageBillings extends javax.swing.JFrame {
         }
         json.GrabarJsons(ids);
         JOptionPane.showMessageDialog(null, "¡La Factura fue Generada con Éxito!");
-    }//GEN-LAST:event_btn_generatePdf1ActionPerformed
+    }//GEN-LAST:event_btn_generateJSONActionPerformed
 
     private void btn_generatePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdfActionPerformed
-       
+        idClient = String.valueOf(tbl_consultReceipts.getValueAt(tbl_consultReceipts.getSelectedRow(), 0));
+        new PDF(idClient);
     }//GEN-LAST:event_btn_generatePdfActionPerformed
 
     /**
@@ -714,8 +715,8 @@ public class PageBillings extends javax.swing.JFrame {
     private javax.swing.JButton btn_addReceipt;
     private javax.swing.JButton btn_cleanfilter;
     private javax.swing.JButton btn_filter;
+    private javax.swing.JButton btn_generateJSON;
     private javax.swing.JButton btn_generatePdf;
-    private javax.swing.JButton btn_generatePdf1;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_menu2;
     private javax.swing.JComboBox<String> cbx_products;

@@ -22,7 +22,7 @@ import model.Receipt;
  *
  * @author argen
  */
-public class CrudBD {
+public class CrudDB {
 
     PreparedStatement ps = null;
     ConexionDB conn = new ConexionDB();

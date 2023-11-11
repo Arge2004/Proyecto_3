@@ -4,7 +4,7 @@
  */
 package view;
 
-import DB.CrudBD;
+import DB.CrudDB;
 import control.Clients;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class PageClientsMenu extends javax.swing.JFrame {
 
     protected static DefaultTableModel model1;
-    private CrudBD crudBD = new CrudBD();
+    private CrudDB crudBD = new CrudDB();
     private ArrayList<Clients> clients = crudBD.getClients();
 
     /**

@@ -457,7 +457,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btn_menu2" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btn_generatePdf1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="btn_generateJSON" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_generatePdf" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
@@ -497,7 +497,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_menu2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="btn_generatePdf" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="btn_generatePdf1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="btn_generateJSON" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="456" max="32767" attributes="0"/>
@@ -639,7 +639,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cleanfilterActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_generatePdf1">
+            <Component class="javax.swing.JButton" name="btn_generateJSON">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="cc" type="rgb"/>
@@ -647,7 +647,7 @@
                 <Property name="text" type="java.lang.String" value="Generar JSON"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_generatePdf1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_generateJSONActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
