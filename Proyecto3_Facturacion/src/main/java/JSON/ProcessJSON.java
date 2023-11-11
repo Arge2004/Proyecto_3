@@ -8,30 +8,33 @@ import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author argen
  */
 public class ProcessJSON {
-    public class GrabarJson {
+    //Esstructura base
+    public void GrabarJson() {
 
-     {
-        Gson gson = new Gson(); 
-        gson.toJson(p1);             
-        String cabeza = "Los pedidos del 9 de febrero";
-        String infomia1 = gson.toJson(p1);         
-        //Guardar
-            BufferedWriter bw = new BufferedWriter(new FileWriter()));
-            bw.write(cabeza);
-            bw.newLine();
-            bw.write(infomia1);
-            System.out.println("Archivo creado y primera persona registrada");
-        
-        // adicionar
-        p3.setNombre("JUAN");
-        p3.setApellidos("Ruiz");
-        p3.setEdad(60);
+        // Crear un objeto Gson
+        Gson gson = new Gson();
+
+        // Crear un objeto para convertir a JSON
+        Persona p1 = new Persona();
+        p1.setNombre("Pedro");
+        p1.setApellidos("Perez");
+        p1.setEdad(30);
+
+        // Convertir el objeto a JSON
+        String json = gson.toJson(p1);
+
+        // Escribir el JSON en un archivo
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("archivo.json"))) {
+            bw.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
