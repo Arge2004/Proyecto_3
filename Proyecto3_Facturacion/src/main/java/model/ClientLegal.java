@@ -30,5 +30,10 @@ public class ClientLegal extends Client implements Clients {
         return socialReason;
     }
 
+    @Override
+    public String getCompleteName() {
+        return socialReason;
+    }
+
    
 }

@@ -563,6 +563,7 @@ public class PageBillings extends javax.swing.JFrame {
                 }
                 tbl_consultReceipts.setModel(model2);
                 model1.setRowCount(0);
+                productsForReceipt.clear();
             } else {
                 JOptionPane.showMessageDialog(null, "¡Debes Seleccionar un Cliente!");
             }

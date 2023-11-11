@@ -14,4 +14,5 @@ public interface Clients {
     public String getPhoneNumber();
     public String getEmailAddress();
     public String getAddress();
+    public String getCompleteName();
 }

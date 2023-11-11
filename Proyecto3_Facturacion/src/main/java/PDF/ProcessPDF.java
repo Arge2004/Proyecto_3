@@ -60,7 +60,7 @@ public class ProcessPDF {
         Receipt receipt = crudDB.getReceipt(id);
         Clients client = (Clients) crudDB.getClient(receipt.getIdClient());
         model.setValueAt(id, 0, 3);
-        model.setValueAt(client.getName(), 5, 1);
+        model.setValueAt(client.getCompleteName(), 5, 1);
         model.setValueAt(client.getId(), 6, 1);
         model.setValueAt(client.getPhoneNumber(), 7, 1);
         model.setValueAt(client.getEmailAddress(), 8, 1);

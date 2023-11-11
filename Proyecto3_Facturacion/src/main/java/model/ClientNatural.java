@@ -30,6 +30,11 @@ public class ClientNatural extends Client implements Clients{
 
     @Override
     public String getName() {
+        return name;
+    }
+    
+    @Override
+    public String getCompleteName(){
         return name+" "+lastName;
     }
     

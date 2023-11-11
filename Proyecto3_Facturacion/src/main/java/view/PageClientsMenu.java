@@ -31,7 +31,7 @@ public class PageClientsMenu extends javax.swing.JFrame {
         while (iterator.hasNext()) {
             Clients client = iterator.next();
             model1.addRow(new Object[]{
-                client.getName(),
+                client.getCompleteName(),
                 client.getId(),
                 client.getPhoneNumber(),
                 client.getEmailAddress(),

@@ -1,52 +1,78 @@
 {
   "receipt": {
-    "numReceipt": "14",
-    "nameClient": "Mateo Lotero",
-    "idClient": "123231",
-    "typeClient": "Cliente Natural",
-    "date": "2023-10-31"
+    "numReceipt": "20",
+    "nameClient": "Universidad de Antioquia",
+    "idClient": "4124124",
+    "typeClient": "Cliente Jurídico",
+    "date": "2023-11-11"
   },
   "details": [
     {
-      "numDetail": "31",
-      "idReceipt": "14",
-      "idProduct": "4",
+      "numDetail": "44",
+      "idReceipt": "20",
+      "idProduct": "20",
       "quantity": "1",
-      "price": "150000"
+      "price": "100000"
     },
     {
-      "numDetail": "32",
-      "idReceipt": "14",
-      "idProduct": "26",
-      "quantity": "2",
-      "price": "160000"
+      "numDetail": "45",
+      "idReceipt": "20",
+      "idProduct": "20",
+      "quantity": "1",
+      "price": "100000"
     },
     {
-      "numDetail": "33",
-      "idReceipt": "14",
-      "idProduct": "26",
-      "quantity": "2",
-      "price": "160000"
+      "numDetail": "46",
+      "idReceipt": "20",
+      "idProduct": "29",
+      "quantity": "1",
+      "price": "75000"
+    },
+    {
+      "numDetail": "47",
+      "idReceipt": "20",
+      "idProduct": "8",
+      "quantity": "3",
+      "price": "180000"
+    },
+    {
+      "numDetail": "48",
+      "idReceipt": "20",
+      "idProduct": "11",
+      "quantity": "1",
+      "price": "80000"
     }
   ],
   "products": [
     {
-      "Id": "4",
-      "name": "Ultrasonido",
-      "price": 150000,
-      "typeProduct": "Imagenología"
+      "Id": "20",
+      "name": "Consulta General",
+      "price": 100000,
+      "typeProduct": "Consulta"
     },
     {
-      "Id": "26",
-      "name": "Hematología",
-      "price": 80000,
+      "Id": "20",
+      "name": "Consulta General",
+      "price": 100000,
+      "typeProduct": "Consulta"
+    },
+    {
+      "Id": "29",
+      "name": "Estudios de Orina",
+      "price": 75000,
       "typeProduct": "Exámenes Clínicos"
     },
     {
-      "Id": "26",
-      "name": "Hematología",
+      "Id": "8",
+      "name": "Corte de Pelo",
+      "price": 60000,
+      "typeProduct": "Peluquería"
+    },
+    {
+      "Id": "11",
+      "name": "Tratamiento de Piel y Pelaje",
       "price": 80000,
-      "typeProduct": "Exámenes Clínicos"
+      "typeProduct": "Peluquería"
     }
   ]
 }
