@@ -19,20 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import model.Product;
 import model.ProductForReceipt;
 import model.Receipt;
-import java.sql.Connection;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
-import DB.ConexionDB;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
@@ -78,8 +64,6 @@ public class PageBillings extends javax.swing.JFrame {
 
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -587,7 +571,7 @@ public class PageBillings extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addReceiptActionPerformed
 
     private void btn_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filterActionPerformed
-        if (txt_idClient.getText().isBlank() && jdc_date1.getDate()==null && jdc_date2.getDate()==null) {
+        if (txt_idClient.getText().isBlank() && jdc_date1.getDate() == null && jdc_date2.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Los filtros estan vacios");
         } else if (txt_idClient.getText().isBlank()) {
             String input = txt_idClient.getText();
@@ -610,7 +594,7 @@ public class PageBillings extends javax.swing.JFrame {
                 }
             }
             tbl_consultReceipts.setModel(model2);
-        } else if (jdc_date1.getDate()==null && jdc_date2.getDate()==null) {
+        } else if (jdc_date1.getDate() == null && jdc_date2.getDate() == null) {
             String input = txt_idClient.getText();
             model2.setRowCount(0);
             Iterator<Receipt> iterator2 = receipts.iterator();
@@ -678,44 +662,16 @@ public class PageBillings extends javax.swing.JFrame {
         int[] selectedRows = tbl_consultReceipts.getSelectedRows();
         ProcessJSON json = new ProcessJSON();
         ArrayList<String> ids = new ArrayList<>();
-        for(int row: selectedRows){
+        for (int row : selectedRows) {
             idClient = String.valueOf(tbl_consultReceipts.getValueAt(row, 0));
             ids.add(idClient);
         }
         json.GrabarJsons(ids);
-        JOptionPane.showMessageDialog(null,"¡La Factura fue Generada con Éxito!");
+        JOptionPane.showMessageDialog(null, "¡La Factura fue Generada con Éxito!");
     }//GEN-LAST:event_btn_generatePdf1ActionPerformed
 
     private void btn_generatePdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generatePdfActionPerformed
-        try {
-        ConexionDB con = new ConexionDB();
-        Connection conn = con.getConexion();
-
-        String sql = "SELECT id_receipt FROM receipts";
-        
-        try (PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            if (rs.next()) {
-                int id = rs.getInt("id_receipt");
-
-                 InputStream inputStream = getClass().getResourceAsStream("/reports/Report.jasper");
-                JasperReport reporte = (JasperReport) JRLoader.loadObject(inputStream);
-                
-                Map<String, Object> parametros = new HashMap<>();
-                parametros.put("ID_PARAM", id);
-
-                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, conn);
-
-                JasperViewer view = new JasperViewer(jprint, false);
-
-                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-                view.setVisible(true);
-            }
-        }
-    } catch (JRException | SQLException ex) {
-    }
+       
     }//GEN-LAST:event_btn_generatePdfActionPerformed
 
     /**
